@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milan Kumar Maharana | AI-Powered Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="https://drive.google.com/thumbnail?id=1UaP5nD445GTT8TdxjMlwuwxDZJwmoHfs">
+    <link rel="icon" type="image/x-icon" href="profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Hidden class for system citation requirements */
@@ -133,12 +133,12 @@
             overflow: hidden; background: var(--bg-card); 
             display: flex; align-items: center; justify-content: center;
             position: relative; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: rotate(-3deg);
+            transform: none;
         }
-        .profile-container:hover { transform: rotate(0deg) scale(1.05); box-shadow: 0 0 60px var(--particle); border-color: var(--accent-2); }
+        .profile-container:hover { transform: scale(1.05); box-shadow: 0 0 60px var(--particle); border-color: var(--accent-2); }
         .profile-img-placeholder { color: var(--accent-1); font-family: 'Fira Code', monospace; text-align: center; opacity: 0.6; z-index: 2; position: absolute; pointer-events: none; padding: 1rem;}
-        .profile-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 1; transition: opacity 0.3s; }
-        .profile-container:hover .profile-image { opacity: 0.8; }
+        .profile-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 1; transition: opacity 0.3s; }
+        .profile-container:hover .profile-image { opacity: 1; }
 
         .btn { display: inline-flex; padding: 14px 28px; background: transparent; color: var(--text-main); border: 1px solid var(--accent-1); border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.9rem; font-weight: 500; position: relative; overflow: hidden; transition: all 0.3s; z-index: 1; text-decoration: none; align-items: center; gap: 8px; cursor: pointer;}
         .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); z-index: -1; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -146,38 +146,56 @@
         .btn:hover { color: #fff; box-shadow: 0 10px 20px -10px var(--accent-1); border-color: transparent; }
 
         /* --- INTERACTIVE AI CHAT UI --- */
-        .ai-chat-container { background: var(--bg-chat); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; height: 600px; backdrop-filter: blur(16px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4); }
+        .ai-chat-container { 
+            background: linear-gradient(180deg, rgba(15, 18, 28, 0.96), rgba(10, 12, 20, 0.92));
+            border: 1px solid rgba(98, 165, 255, 0.28);
+            border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; height: 600px; 
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 25px 60px rgba(0,0,0,0.45), 0 0 30px rgba(56, 189, 248, 0.12);
+            position: relative;
+        }
+        .ai-chat-container::before {
+            content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 35%), radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.12), transparent 30%);
+            pointer-events: none;
+        }
         @media (max-width: 768px) { .ai-chat-container { height: 500px; } }
         
-        .chat-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.15); }
+        .chat-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(8, 12, 18, 0.9), rgba(8, 12, 18, 0.4)); position: relative; z-index: 1; }
         .chat-header-left { display: flex; align-items: center; gap: 12px; }
         .chat-header .status-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
-        .clear-chat-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; font-family: 'Fira Code'; padding: 4px 10px; border-radius: 4px; transition: all 0.3s; cursor: pointer;}
-        .clear-chat-btn:hover { color: var(--accent-2); border-color: var(--accent-2); background: rgba(255,255,255,0.05); }
+        .chat-header-meta { display: flex; flex-direction: column; gap: 2px; }
+        .chat-header-meta .status-label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+        .clear-chat-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; font-family: 'Fira Code'; padding: 4px 10px; border-radius: 999px; transition: all 0.3s; cursor: pointer; }
+        .clear-chat-btn:hover { color: var(--accent-2); border-color: var(--accent-2); background: rgba(255,255,255,0.04); box-shadow: 0 0 16px rgba(129, 140, 248, 0.2); }
         
-        .chat-history { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.2rem; scroll-behavior: smooth; }
+        .chat-history { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.2rem; scroll-behavior: smooth; position: relative; z-index: 1; }
         .chat-history::-webkit-scrollbar { width: 6px; }
         .chat-history::-webkit-scrollbar-track { background: transparent; }
         .chat-history::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         
-        .msg { max-width: 85%; padding: 12px 18px; border-radius: 12px; font-size: 0.95rem; line-height: 1.6; animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
-        .msg.ai { background: var(--msg-ai); align-self: flex-start; border-bottom-left-radius: 4px; color: var(--text-main); border: 1px solid var(--border); font-family: 'Inter', sans-serif; }
-        .msg.user { background: var(--msg-user); align-self: flex-end; border-bottom-right-radius: 4px; color: var(--text-main); border: 1px solid var(--accent-1); font-family: 'Fira Code', monospace;}
+        .msg { max-width: 85%; padding: 12px 18px; border-radius: 16px; font-size: 0.95rem; line-height: 1.6; animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+        .msg.ai { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); align-self: flex-start; border-bottom-left-radius: 6px; color: var(--text-main); border: 1px solid rgba(148, 163, 184, 0.2); font-family: 'Inter', sans-serif; box-shadow: 0 10px 18px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(56,189,248,0.06); }
+        .msg.user { background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(129,140,248,0.18)); align-self: flex-end; border-bottom-right-radius: 6px; color: var(--text-main); border: 1px solid rgba(56,189,248,0.45); font-family: 'Fira Code', monospace; box-shadow: 0 10px 18px rgba(56,189,248,0.12); }
+        .msg.ai strong { color: var(--accent-1); }
         @keyframes slideInUp { to { opacity: 1; transform: translateY(0); } }
         
-        .chat-input-area { padding: 1.5rem; border-top: 1px solid var(--border); background: rgba(0,0,0,0.15); display: flex; flex-direction: column; gap: 12px; }
+        .chat-input-area { padding: 1.5rem; border-top: 1px solid var(--border); background: linear-gradient(180deg, rgba(6,10,17,0.7), rgba(6,10,17,0.35)); display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+        .chat-status-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+        .agent-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.28); color: var(--text-main); border-radius: 999px; padding: 5px 10px; font-size: 0.72rem; font-family: 'Fira Code', monospace; }
+        .agent-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); }
+        .agent-subtext { color: var(--text-muted); font-size: 0.75rem; font-family: 'Inter', sans-serif; }
         .chat-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-        .chat-chip { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-family: 'Inter', sans-serif; transition: all 0.3s; cursor: pointer; }
-        .chat-chip:hover { background: var(--accent-1); color: var(--bg-base); border-color: var(--accent-1); transform: translateY(-2px); font-weight: 500;}
+        .chat-chip { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 999px; font-size: 0.8rem; font-family: 'Inter', sans-serif; transition: all 0.3s; cursor: pointer; }
+        .chat-chip:hover { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #041019; border-color: var(--accent-1); transform: translateY(-2px); font-weight: 600; box-shadow: 0 10px 18px rgba(56, 189, 248, 0.18); }
         
         .input-group { display: flex; gap: 10px; }
-        .input-group input { flex: 1; background: var(--input-bg); border: 1px solid var(--border); color: var(--text-main); padding: 12px 16px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.95rem; outline: none; transition: border-color 0.3s; }
-        .input-group input:focus { border-color: var(--accent-1); box-shadow: 0 0 10px rgba(56, 189, 248, 0.1); }
-        .input-group button { background: var(--accent-1); color: #000; border: none; padding: 0 20px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; transition: opacity 0.3s, transform 0.2s; cursor: pointer; }
-        .input-group button:hover { opacity: 0.8; transform: scale(1.05); }
+        .input-group input { flex: 1; background: rgba(5, 10, 18, 0.8); border: 1px solid rgba(148, 163, 184, 0.25); color: var(--text-main); padding: 12px 16px; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.95rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s; }
+        .input-group input:focus { border-color: var(--accent-1); box-shadow: 0 0 0 3px rgba(56,189,248,0.11), 0 0 18px rgba(56,189,248,0.15); }
+        .input-group button { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #031018; border: none; padding: 0 20px; border-radius: 12px; font-size: 1.2rem; font-weight: bold; transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s; cursor: pointer; box-shadow: 0 12px 24px rgba(56,189,248,0.25); }
+        .input-group button:hover { opacity: 0.96; transform: translateY(-1px) scale(1.02); box-shadow: 0 16px 28px rgba(56,189,248,0.35); }
 
-        .typing-indicator { display: inline-flex; gap: 4px; padding: 12px 16px; background: var(--msg-ai); border-radius: 12px; border: 1px solid var(--border); width: fit-content; border-bottom-left-radius: 4px; animation: slideInUp 0.3s ease forwards;}
-        .typing-indicator span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-indicator { display: inline-flex; gap: 4px; padding: 12px 16px; background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2); width: fit-content; border-bottom-left-radius: 6px; animation: slideInUp 0.3s ease forwards; box-shadow: 0 10px 18px rgba(0,0,0,0.15); }
+        .typing-indicator span { width: 6px; height: 6px; background: var(--accent-1); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
         .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
         .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
 
@@ -189,7 +207,7 @@
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
 
-        .tilt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; display: flex; flex-direction: column;}
+        .tilt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; display: flex; flex-direction: column; margin-bottom: 10px;}
         .tilt-card:hover { border-color: var(--border-hover); box-shadow: 0 15px 30px -15px rgba(0,0,0,0.5); }
         .card-content { transform: translateZ(30px); flex: 1; }
         
@@ -201,7 +219,7 @@
         .timeline-wrapper { border-left: 2px solid var(--border-hover); padding-left: 2.5rem; margin-left: 1rem; }
         .timeline-item { margin-bottom: 4rem; position: relative; }
         .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-item::before { content:''; position: absolute; left: -2.9rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-base); border: 2px solid var(--accent-1); box-shadow: 0 0 10px var(--accent-1); transition: all 0.3s; }
+        .timeline-item::before { content:''; position: absolute; left: -3.1rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-base); border: 2px solid var(--accent-1); box-shadow: 0 0 10px var(--accent-1); transition: all 0.3s; }
         .timeline-item:hover::before { background: var(--accent-1); transform: scale(1.2); }
         .timeline-date { color: var(--accent-1); font-family: 'Fira Code'; font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
         
@@ -333,7 +351,7 @@
             
             <div class="hero-image-wrapper">
                 <div class="profile-container">
-                    <img src="https://drive.google.com/thumbnail?id=1UaP5nD445GTT8TdxjMlwuwxDZJwmoHfs&sz=w325" alt="My Profile Image">
+                    <img class="profile-image" src="profile.jpg" alt="Milan Kumar Maharana Profile Image">
                 </div>
             </div>
         </section>
@@ -347,24 +365,33 @@
                 <div class="chat-header">
                     <div class="chat-header-left">
                         <div class="status-dot"></div>
-                        <span class="mono" style="font-size: 0.9rem;">Milan_AI_Agent (Online)</span>
+                        <div class="chat-header-meta">
+                            <span class="mono" style="font-size: 0.9rem;">Milan_AI_Agent</span>
+                            <span class="status-label">Online · Profile-aware</span>
+                        </div>
                     </div>
                     <button class="clear-chat-btn" id="clear-chat" aria-label="Clear chat history">Clear Chat</button>
                 </div>
                 
                 <div class="chat-history" id="chat-history">
-                    <div class="msg ai">Hello! I'm an AI assistant trained on Milan's portfolio. You can ask me about his enterprise deployments, technical skills, leadership competencies, or contact information. How can I help you today?<span class="sys-cite"></span></div>
+                    <div class="msg ai">Hello! I'm Milan's AI agent, tuned to his resume and experience. I can explain his enterprise projects, AI architecture work, leadership style, hiring fit, and contact details. Ask me anything about his profile.<span class="sys-cite"></span></div>
                 </div>
 
                 <div class="chat-input-area">
+                    <div class="chat-status-bar">
+                        <span class="agent-badge">AI Agent Live</span>
+                        <span class="agent-subtext">Contextual replies • Hiring-fit analysis • Project summaries</span>
+                    </div>
                     <div class="chat-chips">
-                        <button class="chat-chip">Where have you worked?</button>
-                        <button class="chat-chip">What is your tech stack?</button>
-                        <button class="chat-chip">Tell me about your AI skills.</button>
-                        <button class="chat-chip">How do I contact you?</button>
+                        <button class="chat-chip">Where has he worked?</button>
+                        <button class="chat-chip">What is his tech stack?</button>
+                        <button class="chat-chip">How strong is his AI leadership?</button>
+                        <button class="chat-chip">Is he a good fit for senior roles?</button>
+                        <button class="chat-chip">How can I contact him?</button>
+                        <button class="chat-chip">Show me his main projects.</button>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="chat-input" placeholder="Type a message (e.g. 'Tell me about your projects')..." aria-label="Chat input">
+                        <input type="text" id="chat-input" placeholder="Ask about his experience, stack, AI work, leadership, or hiring fit..." aria-label="Chat input">
                         <button id="chat-send" aria-label="Send message">&#8594;</button>
                     </div>
                 </div>
@@ -567,6 +594,7 @@
         </div>
     </footer>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         // --- 1. Dynamic Hero Typewriter ---
         const roles = ["Senior Lead Engineer", "Cloud-Native Architect", "AI Integration Specialist", "Software Development Engineer", "Technical Lead", "Full-Stack Developer", "Microservices Expert", "Spring Boot Specialist", "DevOps & CI/CD Engineer", "Distributed Systems Architect", "Enterprise Solutions Consultant", "Vector Database & LLM Engineer", "Generative AI Developer", "Software Quality Advocate", "Cross-Functional Team Mentor", "Agile Scrum Practitioner", "Critical Thinking Problem Solver", "Leadership & Mentorship Coach", "Continuous Improvement Champion", "Innovative Technology Strategist", "Software Performance Optimizer", "Cloud Infrastructure Designer", "Observability & Monitoring Specialist", "Security & Authentication Expert", "Testing & Quality Assurance Engineer", "Database & ORM Specialist", "Messaging & Event-Driven Architect", "Front-End UI/UX Developer", "Back-End API Engineer", "Enterprise Deployment Lead"];
@@ -620,7 +648,7 @@
             const toast = document.getElementById('resume-toast');
             toast.classList.add('show');
 
-            const resumeUrl = 'https://drive.google.com/uc?export=download&id=1AD-h6P3togI4FiUJ7U1MFG006bosvyPa';
+            const resumeUrl = 'Milan_Kumar_Maharana.pdf';
             const link = document.createElement('a');
             link.href = resumeUrl;
             link.target = '_blank';
@@ -724,51 +752,54 @@
         const clearChatBtn = document.getElementById('clear-chat');
         const initialAiMessage = document.querySelector('.msg.ai').outerHTML;
 
-        const resumeData = {
-            experience: "Milan has 8+ years of experience. He is currently an IT Analyst (Lead Engineer) at TCS (Sep 2022 - Present) leading the J&J Vision project. Previously, a Senior Software Engineer at HCL for Deutsche Bank, and Staff Engineer at LeadIcon for Orbyo.<span class='sys-cite'></span>",
-            projects: "Key enterprise deployments: \n1. J&J Vision (Lead Engineer) - ACUVUE e-commerce, Docker/K8s.\n2. Deutsche Bank (Senior Software Engineer) - BFSI web app, Oracle PL/SQL, L3 Support.\n3. Orbyo (Staff Engineer) - AI-powered automotive CRM.<span class='sys-cite'></span>",
-            skills: "Core technical stack includes: Java (Core, Streams), Spring Boot, Spring Cloud, Spring AI, WebClient, Microservices, AWS (EC2, S3), Docker, Kafka, PostgreSQL, Zipkin, Jaeger, and Vector DBs.<span class='sys-cite'></span>",
-            awards: "Awards at TCS include Xcelerate Victor (2026), tcsAl Spark (2025), Feedback Enabler (2025), Service & Commitment (2025), and Xcelerate Warrior (2024). He is also highly skilled in Leadership, Critical Thinking, and Agile/Scrum delivery.<span class='sys-cite'></span>",
-            contact: "You can reach Milan directly via email at milankm.official@gmail.com, by phone at (+91) 907-899-3767, or connect on LinkedIn at www.LinkedIn.com/in/milankm.<span class='sys-cite'></span>",
-            ai: "Milan specializes in Spring AI, OpenAI API, Google Vertex AI, Ollama, MCP Servers, and Vector Databases (PGVector, Pinecone, Chroma, MongoDB Atlas) for building robust Retrieval-Augmented Generation (RAG) pipelines.<span class='sys-cite'></span>",
-            fallback: "I am actively parsing Milan's profile. I can answer questions about his enterprise deployments, technical skills, AI architecture capabilities, awards, leadership competencies, or contact information. What would you like to know?<span class='sys-cite'>[</span>"
-        };
+        const socket = io();
 
-        function getAIResponse(input) {
-            const lower = input.toLowerCase();
-            if (lower.includes('experience') || lower.includes('work') || lower.includes('job') || lower.includes('tcs') || lower.includes('hcl') || lower.includes('history')) return resumeData.experience;
-            if (lower.includes('project') || lower.includes('portfolio') || lower.includes('j&j') || lower.includes('deutsche') || lower.includes('orbyo')) return resumeData.projects;
-            if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('java') || lower.includes('spring') || lower.includes('framework')) return resumeData.skills;
-            if (lower.includes('award') || lower.includes('certificat') || lower.includes('achieve') || lower.includes('recogni') || lower.includes('soft') || lower.includes('leader')) return resumeData.awards;
-            if (lower.includes('contact') || lower.includes('email') || lower.includes('phone') || lower.includes('reach') || lower.includes('hire') || lower.includes('number')) return resumeData.contact;
-            if (lower.includes('ai') || lower.includes('llm') || lower.includes('rag') || lower.includes('machine learning') || lower.includes('vertex') || lower.includes('ollama')) return resumeData.ai;
-            return resumeData.fallback;
+        function addMessage(type, text) {
+            const msg = document.createElement('div');
+            msg.className = `msg ${type}`;
+            msg.innerHTML = text;
+            chatHistory.appendChild(msg);
+            chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
         }
 
-        function processUserMessage(text) {
-            if (!text.trim()) return;
-            const userMsg = document.createElement('div');
-            userMsg.className = 'msg user';
-            userMsg.textContent = text;
-            chatHistory.appendChild(userMsg);
-            chatInput.value = '';
-
+        function showTyping() {
             const typing = document.createElement('div');
             typing.className = 'typing-indicator';
             typing.innerHTML = '<span></span><span></span><span></span>';
             chatHistory.appendChild(typing);
             chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
+            return typing;
+        }
 
-            const aiResponseText = getAIResponse(text);
+        function processUserMessage(text) {
+            if (!text.trim()) return;
 
-            setTimeout(() => {
+            addMessage('user', text);
+            chatInput.value = '';
+            const typing = showTyping();
+
+            socket.emit('chat:message', text);
+
+            socket.once('chat:reply', ({ answer, suggestions }) => {
                 chatHistory.removeChild(typing);
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'msg ai';
-                aiMsg.innerHTML = aiResponseText;
-                chatHistory.appendChild(aiMsg);
-                chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
-            }, 800 + Math.random() * 600);
+                addMessage('ai', answer);
+
+                if (suggestions && suggestions.length) {
+                    const suggestionWrap = document.createElement('div');
+                    suggestionWrap.style.display = 'flex';
+                    suggestionWrap.style.flexWrap = 'wrap';
+                    suggestionWrap.style.gap = '8px';
+                    suggestionWrap.style.marginTop = '6px';
+                    suggestions.forEach((suggestion) => {
+                        const chip = document.createElement('button');
+                        chip.className = 'chat-chip';
+                        chip.textContent = suggestion;
+                        chip.addEventListener('click', () => processUserMessage(suggestion));
+                        suggestionWrap.appendChild(chip);
+                    });
+                    chatHistory.appendChild(suggestionWrap);
+                }
+            });
         }
 
         document.querySelectorAll('.chat-chip').forEach(chip => {
