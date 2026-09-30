@@ -207,7 +207,7 @@
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
 
-        .tilt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; display: flex; flex-direction: column; margin-bottom: 10px;}
+        .tilt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; display: flex; flex-direction: column;margin-bottom: 10px;}
         .tilt-card:hover { border-color: var(--border-hover); box-shadow: 0 15px 30px -15px rgba(0,0,0,0.5); }
         .card-content { transform: translateZ(30px); flex: 1; }
         
@@ -594,7 +594,6 @@
         </div>
     </footer>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
         // --- 1. Dynamic Hero Typewriter ---
         const roles = ["Senior Lead Engineer", "Cloud-Native Architect", "AI Integration Specialist", "Software Development Engineer", "Technical Lead", "Full-Stack Developer", "Microservices Expert", "Spring Boot Specialist", "Distributed Systems Architect", "Enterprise Solutions Consultant", "Vector Database & LLM Engineer", "Generative AI Developer", "Critical Thinking Problem Solver", "Leadership & Mentorship Coach", "Continuous Improvement Champion", "Innovative Technology Strategist", "Software Performance Optimizer", "Cloud Infrastructure Designer", "Observability & Monitoring Specialist", "Security & Authentication Expert", "Messaging & Event-Driven Architect", "Front-End UI/UX Developer", "Back-End API Senior Developer", "Enterprise Deployment Lead", "Solution Design & Architecture Consultant"];
@@ -752,54 +751,82 @@
         const clearChatBtn = document.getElementById('clear-chat');
         const initialAiMessage = document.querySelector('.msg.ai').outerHTML;
 
-        const socket = io();
+        const resumeData = {
+            experience: "Milan brings 8+ years of experience in enterprise software delivery across BFSI, eCommerce, and CRM. He is currently an IT Analyst and Lead Engineer at TCS, supporting the J&J Vision program. Before that, he was a Senior Software Engineer at HCL for Deutsche Bank and a Staff Engineer at LeadIcon for the Orbyo AI CRM platform. In short: strong delivery depth, global client exposure, and leadership across critical production systems.<span class='sys-cite'></span>",
+            projects: "His notable project work includes:<br><strong>1.</strong> J&J Vision — leading architecture and delivery for ACUVUE and ophthalmology platforms using Docker, Kubernetes, React, Spring Boot, and Oracle.<br><strong>2.</strong> Deutsche Bank — mission-critical BFSI applications with Java 17, Spring Data JPA, Oracle PL/SQL, and L3 production support.<br><strong>3.</strong> Orbyo AI CRM — AI-powered customer data and sales intelligence platform for automotive lead scoring and geo-targeting. This shows his range from enterprise-scale banking systems to AI-driven CRM products.<span class='sys-cite'></span>",
+            skills: "His core stack includes Java, Spring Boot, Spring Cloud, REST APIs, Microservices, Kafka, RabbitMQ, Docker, AWS, PostgreSQL, MongoDB, Oracle, React, and TypeScript. He also works with AI tooling such as Spring AI, OpenAI API, Vertex AI, Ollama, MCP Server patterns, and vector databases like PGVector, Pinecone, Chroma, and MongoDB Atlas.<span class='sys-cite'></span>",
+            awards: "Milan has multiple recognitions at TCS, including Xcelerate Victor (2026), tcsAl Spark (2025), Feedback Enabler (2025), Service & Commitment (2025), and Xcelerate Warrior (2024). These reflect not only technical capability, but also mentoring, collaboration, and continuous improvement in high-pressure delivery environments.<span class='sys-cite'></span>",
+            contact: "You can contact Milan via email at milankm.official@gmail.com, phone at (+91) 907-899-3767, or connect on LinkedIn at www.LinkedIn.com/in/milankm. He is based in Bengaluru, Karnataka, India.<span class='sys-cite'></span>",
+            ai: "Milan's AI work spans LLM integration, RAG pipeline design, MCP-based tool orchestration, and semantic retrieval with vector databases. He is comfortable with Spring AI, OpenAI APIs, Google Vertex AI, Ollama, and enterprise-grade AI integration patterns that connect backend systems with intelligent business workflows.<span class='sys-cite'></span>",
+            leadership: "He is strong in technical leadership, sprint planning, mentoring, root-cause analysis, and cross-functional communication. He has led teams, guided architecture decisions, and handled production-critical support while maintaining quality and delivery velocity. This makes him well-suited for senior engineer, lead engineer, or architecture-adjacent roles.<span class='sys-cite'></span>",
+            fit: "For senior engineering roles, Milan is a strong fit if the team needs someone who can lead delivery, own architecture decisions, work across Java/Spring ecosystems, and bring AI integration skills into enterprise products. He combines engineering depth, cloud-native thinking, and people leadership.<span class='sys-cite'></span>",
+            fallback: "I can help with Milan's experience, enterprise projects, AI capabilities, leadership strengths, awards, or how to reach him. If you want a precise answer, try asking: 'What projects has he done?', 'How strong is his AI work?', or 'Is he a fit for senior engineering roles?'<span class='sys-cite'></span>",
+            summary: "In one line: Milan is a senior-level full-stack and platform engineer with deep Java/Spring expertise, strong enterprise delivery experience, and growing AI/LLM integration capability.<span class='sys-cite'></span>"
+        };
 
-        function addMessage(type, text) {
-            const msg = document.createElement('div');
-            msg.className = `msg ${type}`;
-            msg.innerHTML = text;
-            chatHistory.appendChild(msg);
-            chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
+        function getAIResponse(input) {
+            const trimmed = input.trim();
+            const lower = trimmed.toLowerCase();
+
+            if (!trimmed) return "Please ask me something about Milan's background, projects, AI work, leadership, or contact details.";
+            if (/(^hi$|^hello$|^hey$|hi there|hello there|good morning|good evening|good afternoon)/.test(lower)) {
+                return "Hello! I’m Milan’s AI assistant. I can summarize his experience, projects, AI work, leadership profile, and contact information. What would you like to know?";
+            }
+            if (/(thank you|thanks|appreciate it|helpful)/.test(lower)) {
+                return "You’re welcome. I can also break down his resume by experience, technical stack, AI capability, or hiring fit if you want a deeper view.";
+            }
+            if (/(who is he|introduce him|tell me about milan|about milan|what is he like)/.test(lower)) {
+                return resumeData.summary;
+            }
+            if (/(what do you know|what can you answer|what can you tell me|what are you)/.test(lower)) {
+                return "I can answer questions about Milan's experience, projects, technologies, leadership, AI/LLM work, awards, and how to contact him. I’m essentially a concise, profile-aware assistant for his portfolio.";
+            }
+
+            const intentMatches = [
+                { pattern: /(experience|career|background|journey|work history|where has he worked|company|companies|employment)/, response: resumeData.experience },
+                { pattern: /(project|projects|deployments|case study|enterprise|implementation|what has he built|what are his projects)/, response: resumeData.projects },
+                { pattern: /(skill|skills|tech stack|technology|stack|architecture|backend|frontend|full stack|java|spring|microservices|cloud)/, response: resumeData.skills },
+                { pattern: /(ai|llm|rag|vector|generative|genai|vertex|ollama|mcp|machine learning|ml)/, response: resumeData.ai },
+                { pattern: /(leader|leadership|mentor|team|management|mentoring|cross[- ]functional|decision making|problem solving)/, response: resumeData.leadership },
+                { pattern: /(award|awards|certificate|certificates|recognition|achievement|honor)/, response: resumeData.awards },
+                { pattern: /(contact|email|phone|call|reach|linkedin|location|hire|recruit|interview)/, response: resumeData.contact },
+                { pattern: /(fit|suitable|good fit|senior role|hire him|should we hire|worth hiring|role fit)/, response: resumeData.fit },
+                { pattern: /(why|strength|value|strengths|advantages|best at|what makes him)/, response: "Milan's strongest value is combining enterprise delivery discipline with modern AI and cloud-native thinking. He can lead, build, troubleshoot, and integrate systems in ways that matter to complex business environments.<span class='sys-cite'></span>" },
+                { pattern: /(how does he work|how does he operate|how does he deliver|what kind of engineer)/, response: "Milan works best in teams that need a senior engineer who can move from architecture to implementation. He is comfortable with backend design, API delivery, cloud deployment, production support, and AI-enabled system integration.<span class='sys-cite'></span>" }
+            ];
+
+            for (const match of intentMatches) {
+                if (match.pattern.test(lower)) return match.response;
+            }
+
+            const generalFallback = `I can help with Milan's background, technical depth, AI work, leadership, awards, or contact details. Based on his profile, he is a senior engineer with strong Java/Spring expertise, enterprise delivery experience, and modern AI integration exposure. Ask me something more specific and I’ll answer directly.`;
+            return generalFallback;
         }
 
-        function showTyping() {
+        function processUserMessage(text) {
+            if (!text.trim()) return;
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.textContent = text;
+            chatHistory.appendChild(userMsg);
+            chatInput.value = '';
+
             const typing = document.createElement('div');
             typing.className = 'typing-indicator';
             typing.innerHTML = '<span></span><span></span><span></span>';
             chatHistory.appendChild(typing);
             chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
-            return typing;
-        }
 
-        function processUserMessage(text) {
-            if (!text.trim()) return;
+            const aiResponseText = getAIResponse(text);
 
-            addMessage('user', text);
-            chatInput.value = '';
-            const typing = showTyping();
-
-            socket.emit('chat:message', text);
-
-            socket.once('chat:reply', ({ answer, suggestions }) => {
+            setTimeout(() => {
                 chatHistory.removeChild(typing);
-                addMessage('ai', answer);
-
-                if (suggestions && suggestions.length) {
-                    const suggestionWrap = document.createElement('div');
-                    suggestionWrap.style.display = 'flex';
-                    suggestionWrap.style.flexWrap = 'wrap';
-                    suggestionWrap.style.gap = '8px';
-                    suggestionWrap.style.marginTop = '6px';
-                    suggestions.forEach((suggestion) => {
-                        const chip = document.createElement('button');
-                        chip.className = 'chat-chip';
-                        chip.textContent = suggestion;
-                        chip.addEventListener('click', () => processUserMessage(suggestion));
-                        suggestionWrap.appendChild(chip);
-                    });
-                    chatHistory.appendChild(suggestionWrap);
-                }
-            });
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg ai';
+                aiMsg.innerHTML = aiResponseText;
+                chatHistory.appendChild(aiMsg);
+                chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
+            }, 700 + Math.random() * 700);
         }
 
         document.querySelectorAll('.chat-chip').forEach(chip => {
