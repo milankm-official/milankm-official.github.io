@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan Kumar Maharana | AI-Powered Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="profile.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Hidden class for system citation requirements */
+        .sys-cite { display: none; }
+
+        /* --- Multi-Theming Variables --- */
+        :root[data-theme="dark"] {
+            --bg-base: #030305; --bg-card: rgba(20, 20, 25, 0.4); --bg-chat: rgba(15, 15, 20, 0.7);
+            --text-main: #f8fafc; --text-muted: #94a3b8;
+            --accent-1: #38bdf8; --accent-2: #818cf8;
+            --border: rgba(255, 255, 255, 0.08); --border-hover: rgba(56, 189, 248, 0.4);
+            --particle: rgba(56, 189, 248, 0.2); --msg-user: rgba(56, 189, 248, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.3); --modal-bg: rgba(10, 12, 16, 0.85);
+        }
+        :root[data-theme="light"] {
+            --bg-base: #f8fafc; --bg-card: rgba(255, 255, 255, 0.8); --bg-chat: rgba(240, 244, 248, 0.9);
+            --text-main: #0f172a; --text-muted: #475569;
+            --accent-1: #2563eb; --accent-2: #4f46e5;
+            --border: rgba(0, 0, 0, 0.15); --border-hover: rgba(37, 99, 235, 0.5);
+            --particle: rgba(37, 99, 235, 0.15); --msg-user: rgba(37, 99, 235, 0.15);
+            --msg-ai: rgba(0, 0, 0, 0.05); --input-bg: rgba(255, 255, 255, 0.8); --modal-bg: rgba(255, 255, 255, 0.95);
+        }
+        :root[data-theme="cyber"] {
+            --bg-base: #000500; --bg-card: rgba(0, 15, 0, 0.6); --bg-chat: rgba(0, 25, 0, 0.75);
+            --text-main: #22c55e; --text-muted: #166534;
+            --accent-1: #4ade80; --accent-2: #22c55e;
+            --border: rgba(74, 222, 128, 0.2); --border-hover: rgba(74, 222, 128, 0.6);
+            --particle: rgba(74, 222, 128, 0.2); --msg-user: rgba(74, 222, 128, 0.15);
+            --msg-ai: rgba(74, 222, 128, 0.05); --input-bg: rgba(0, 0, 0, 0.4); --modal-bg: rgba(0, 15, 0, 0.9);
+        }
+        :root[data-theme="synthwave"] {
+            --bg-base: #0f0014; --bg-card: rgba(30, 0, 40, 0.5); --bg-chat: rgba(40, 0, 50, 0.7);
+            --text-main: #fdf4ff; --text-muted: #d8b4e2;
+            --accent-1: #d946ef; --accent-2: #8b5cf6;
+            --border: rgba(217, 70, 239, 0.2); --border-hover: rgba(217, 70, 239, 0.6);
+            --particle: rgba(217, 70, 239, 0.25); --msg-user: rgba(217, 70, 239, 0.2);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.3); --modal-bg: rgba(20, 0, 30, 0.85);
+        }
+        :root[data-theme="sunset"] {
+            --bg-base: #1a0800; --bg-card: rgba(40, 15, 0, 0.5); --bg-chat: rgba(45, 10, 0, 0.7);
+            --text-main: #fff7ed; --text-muted: #fdba74;
+            --accent-1: #f97316; --accent-2: #e11d48;
+            --border: rgba(249, 115, 22, 0.2); --border-hover: rgba(249, 115, 22, 0.6);
+            --particle: rgba(249, 115, 22, 0.25); --msg-user: rgba(249, 115, 22, 0.2);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.3); --modal-bg: rgba(25, 10, 0, 0.85);
+        }
+        :root[data-theme="ocean"] {
+            --bg-base: #001015; --bg-card: rgba(0, 25, 35, 0.5); --bg-chat: rgba(0, 30, 40, 0.7);
+            --text-main: #e0f2fe; --text-muted: #7dd3fc;
+            --accent-1: #0ea5e9; --accent-2: #14b8a6;
+            --border: rgba(14, 165, 233, 0.2); --border-hover: rgba(14, 165, 233, 0.6);
+            --particle: rgba(14, 165, 233, 0.25); --msg-user: rgba(14, 165, 233, 0.2);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.3); --modal-bg: rgba(0, 15, 25, 0.85);
+        }
+        :root[data-theme="forest"] {
+            --bg-base: #01120a; --bg-card: rgba(1, 25, 15, 0.6); --bg-chat: rgba(2, 35, 20, 0.7);
+            --text-main: #d1fae5; --text-muted: #6ee7b7;
+            --accent-1: #10b981; --accent-2: #059669;
+            --border: rgba(16, 185, 129, 0.2); --border-hover: rgba(16, 185, 129, 0.6);
+            --particle: rgba(16, 185, 129, 0.2); --msg-user: rgba(16, 185, 129, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.4); --modal-bg: rgba(1, 15, 10, 0.9);
+        }
+        :root[data-theme="ruby"] {
+            --bg-base: #170308; --bg-card: rgba(35, 5, 15, 0.6); --bg-chat: rgba(45, 10, 20, 0.7);
+            --text-main: #ffe4e6; --text-muted: #fda4af;
+            --accent-1: #f43f5e; --accent-2: #e11d48;
+            --border: rgba(244, 63, 94, 0.2); --border-hover: rgba(244, 63, 94, 0.6);
+            --particle: rgba(244, 63, 94, 0.2); --msg-user: rgba(244, 63, 94, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 0, 0, 0.4); --modal-bg: rgba(20, 5, 10, 0.9);
+        }
+        :root[data-theme="aurora"] {
+            --bg-base: #061512; --bg-card: rgba(12, 34, 28, 0.72); --bg-chat: rgba(7, 27, 23, 0.86);
+            --text-main: #ecfdf5; --text-muted: #9ac9b7;
+            --accent-1: #2dd4bf; --accent-2: #bef264;
+            --border: rgba(45, 212, 191, 0.18); --border-hover: rgba(45, 212, 191, 0.55);
+            --particle: rgba(45, 212, 191, 0.2); --msg-user: rgba(45, 212, 191, 0.16);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(0, 12, 10, 0.45); --modal-bg: rgba(6, 21, 18, 0.92);
+        }
+        :root[data-theme="amber"] {
+            --bg-base: #181207; --bg-card: rgba(39, 29, 12, 0.7); --bg-chat: rgba(28, 21, 10, 0.88);
+            --text-main: #fff8e7; --text-muted: #d9c18b;
+            --accent-1: #fbbf24; --accent-2: #fb7185;
+            --border: rgba(251, 191, 36, 0.2); --border-hover: rgba(251, 191, 36, 0.55);
+            --particle: rgba(251, 191, 36, 0.2); --msg-user: rgba(251, 191, 36, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(12, 8, 2, 0.45); --modal-bg: rgba(24, 18, 7, 0.92);
+        }
+        :root[data-theme="rose"] {
+            --bg-base: #190b13; --bg-card: rgba(39, 17, 30, 0.7); --bg-chat: rgba(28, 10, 21, 0.88);
+            --text-main: #fff1f5; --text-muted: #e5a9bd;
+            --accent-1: #fb7185; --accent-2: #f0abfc;
+            --border: rgba(251, 113, 133, 0.2); --border-hover: rgba(251, 113, 133, 0.55);
+            --particle: rgba(251, 113, 133, 0.2); --msg-user: rgba(251, 113, 133, 0.16);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(14, 4, 9, 0.45); --modal-bg: rgba(25, 11, 19, 0.92);
+        }
+        :root[data-theme="citrus"] {
+            --bg-base: #101b0c; --bg-card: rgba(24, 38, 15, 0.72); --bg-chat: rgba(17, 30, 12, 0.88);
+            --text-main: #eff5d8; --text-muted: #b3c293;
+            --accent-1: #c6f25b; --accent-2: #ee9a4b;
+            --border: rgba(198, 242, 91, 0.2); --border-hover: rgba(198, 242, 91, 0.58);
+            --particle: rgba(198, 242, 91, 0.2); --msg-user: rgba(198, 242, 91, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(7, 14, 5, 0.5); --modal-bg: rgba(13, 22, 10, 0.94);
+        }
+        :root[data-theme="glacier"] {
+            --bg-base: #091923; --bg-card: rgba(15, 37, 50, 0.74); --bg-chat: rgba(9, 30, 43, 0.88);
+            --text-main: #e7f6f7; --text-muted: #9abdc2;
+            --accent-1: #54d3d0; --accent-2: #ff937a;
+            --border: rgba(84, 211, 208, 0.2); --border-hover: rgba(84, 211, 208, 0.58);
+            --particle: rgba(84, 211, 208, 0.2); --msg-user: rgba(84, 211, 208, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(4, 17, 25, 0.5); --modal-bg: rgba(8, 25, 35, 0.94);
+        }
+        :root[data-theme="graphite"] {
+            --bg-base: #161719; --bg-card: rgba(35, 37, 40, 0.76); --bg-chat: rgba(25, 27, 30, 0.9);
+            --text-main: #f3f2ec; --text-muted: #a6a6a1;
+            --accent-1: #f4c95d; --accent-2: #ef775b;
+            --border: rgba(244, 201, 93, 0.18); --border-hover: rgba(244, 201, 93, 0.55);
+            --particle: rgba(244, 201, 93, 0.2); --msg-user: rgba(244, 201, 93, 0.14);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(10, 11, 12, 0.52); --modal-bg: rgba(20, 21, 23, 0.94);
+        }
+        :root[data-theme="lagoon"] {
+            --bg-base: #071c21; --bg-card: rgba(12, 42, 47, 0.74); --bg-chat: rgba(7, 31, 37, 0.88);
+            --text-main: #e2f7f4; --text-muted: #9ac5be;
+            --accent-1: #39d2be; --accent-2: #ffc477;
+            --border: rgba(57, 210, 190, 0.2); --border-hover: rgba(57, 210, 190, 0.58);
+            --particle: rgba(57, 210, 190, 0.2); --msg-user: rgba(57, 210, 190, 0.15);
+            --msg-ai: rgba(255, 255, 255, 0.05); --input-bg: rgba(3, 17, 21, 0.5); --modal-bg: rgba(6, 27, 32, 0.94);
+        }
+
+        /* --- Base Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; transition: background-color 0.6s ease, color 0.6s ease; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, .mono { font-family: 'Fira Code', monospace; }
+        
+        /* --- Background & Cursor --- */
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; }
+        .ambient-glow { position: fixed; top: 50%; left: 50%; width: 80vw; height: 80vh; transform: translate(-50%, -50%); background: radial-gradient(circle, var(--particle) 0%, transparent 65%); filter: blur(120px); z-index: -1; pointer-events: none; opacity: 0.6; transition: background 0.6s ease; }
+        
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--accent-1); box-shadow: 0 0 12px var(--accent-1), 0 0 2px rgba(0,0,0,0.5); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-2); transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+        @media (max-width: 768px) { .cursor-dot, .cursor-outline { display: none; } } /* No custom cursor on touch */
+
+        /* --- UI Controls --- */
+        .theme-switcher {
+            display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+            width: max-content; max-width: calc(100vw - 24px); margin: 12px 16px 12px auto;
+        }
+        .theme-toggle {
+            display: grid; place-items: center; width: 48px; height: 48px;
+            color: var(--text-main); background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50%; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+        .theme-toggle svg { width: 22px; height: 22px; }
+        .theme-toggle:hover, .theme-toggle[aria-expanded="true"] { color: var(--accent-1); border-color: var(--accent-1); }
+        .theme-toggle:focus-visible, .theme-dialog-close:focus-visible, .theme-btn:focus-visible, .nav-links a:focus-visible {
+            outline: 2px solid var(--accent-1);
+            outline-offset: 4px;
+        }
+        .theme-controls {
+            position: fixed; top: 0; right: 16px; bottom: auto; left: auto;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+            width: max-content; height: max-content; margin: 0;
+            background: rgba(10, 12, 18, 0.84); padding: 8px 12px; border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.24); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08);
+            max-width: calc(100vw - 48px); justify-content: center;
+        }
+        .theme-controls:not([open]) { display: none; }
+        .theme-controls::backdrop { background: rgba(2, 6, 12, 0.62); backdrop-filter: blur(4px); }
+        .theme-controls-label {
+            color: var(--text-muted); font: 0.62rem 'Fira Code', monospace;
+            letter-spacing: 0.08em; text-transform: uppercase; flex: 0 0 auto; padding-right: 4px;
+        }
+        .theme-dialog-close {
+            position: static; display: grid; place-items: center; flex: 0 0 30px; margin-left: auto;
+            width: 30px; height: 30px; padding: 0; border-radius: 50%;
+            color: var(--text-muted); background: var(--bg-base); border: 1px solid var(--border);
+            font-size: 1.25rem; line-height: 1; cursor: pointer;
+        }
+        .theme-dialog-close:hover { color: var(--accent-1); border-color: var(--accent-1); }
+        .theme-btn {
+            width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent;
+            color: var(--text-main); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer; flex-shrink: 0; position: relative; overflow: hidden; background-clip: padding-box;
+        }
+        .theme-btn::after {
+            content: ''; position: absolute; width: 5px; height: 9px; left: 50%; top: 44%;
+            border: solid currentColor; border-width: 0 2px 2px 0;
+            transform: translate(-50%, -55%) rotate(45deg); opacity: 0;
+        }
+        .theme-btn.active::after { opacity: 1; }
+        .theme-btn:hover { transform: scale(1.18); }
+        .theme-btn.active {
+            transform: scale(1.08); border-color: var(--text-main);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.12), 0 0 12px var(--accent-1);
+        }
+        .theme-btn[data-set="dark"] { background: #030305; border-color: #38bdf8; }
+        .theme-btn[data-set="light"] { background: #f8fafc; border-color: #2563eb; }
+        .theme-btn[data-set="cyber"] { background: #000500; border-color: #4ade80; }
+        .theme-btn[data-set="synthwave"] { background: #2e004f; border-color: #d946ef; }
+        .theme-btn[data-set="sunset"] { background: #4a1500; border-color: #f97316; }
+        .theme-btn[data-set="ocean"] { background: #002533; border-color: #0ea5e9; }
+        .theme-btn[data-set="forest"] { background: #01120a; border-color: #10b981; }
+        .theme-btn[data-set="ruby"] { background: #170308; border-color: #f43f5e; }
+        .theme-btn[data-set="aurora"] { background: #061512; border-color: #2dd4bf; }
+        .theme-btn[data-set="amber"] { background: #181207; border-color: #fbbf24; }
+        .theme-btn[data-set="rose"] { background: #190b13; border-color: #fb7185; }
+        .theme-btn[data-set="citrus"] { background: #101b0c; border-color: #c6f25b; }
+        .theme-btn[data-set="glacier"] { background: #091923; border-color: #54d3d0; }
+        .theme-btn[data-set="graphite"] { background: #161719; border-color: #f4c95d; }
+        .theme-btn[data-set="lagoon"] { background: #071c21; border-color: #39d2be; }
+        :root[data-theme="light"] .theme-controls {
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(15, 23, 42, 0.16);
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+        :root[data-theme="light"] .theme-btn.active {
+            border-color: #0f172a;
+            box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--accent-1);
+        }
+
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--modal-bg); color: var(--text-main); padding: 12px 24px; border-radius: 30px; border: 1px solid var(--accent-1); font-family: 'Fira Code', monospace; font-size: 0.9rem; z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(56, 189, 248, 0.3); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 10px; white-space: nowrap;}
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* --- Layout & Typography --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 6rem 0; }
+        @media (max-width: 768px) { section { padding: 4rem 0; } .container { padding: 0 1.5rem; } }
+        h2.section-title { font-size: 2.2rem; margin-bottom: 2rem; letter-spacing: -0.02em; }
+        .gradient-text { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* --- Hero Section & Profile Image --- */
+        .hero { min-height: 100vh; display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; position: relative; gap: 3rem; padding-top: 32px;}
+        .hero-content { flex: 1.5; min-width: 300px; }
+        .hero h1 { font-size: clamp(2.8rem, 5vw, 5rem); margin-bottom: 0.5rem; line-height: 1.1; letter-spacing: -1px; }
+        
+        /* Dynamic Typewriter text */
+        .typewriter-wrapper { height: 2.5rem; margin-bottom: 1.5rem; display: flex; align-items: center;}
+        .hero h2 { font-size: clamp(1.2rem, 2vw, 1.8rem); margin: 0; }
+        .hero-cursor { display: inline-block; width: 3px; height: 1.5rem; background-color: var(--accent-1); animation: blink 1s step-end infinite; margin-left: 5px; vertical-align: middle;}
+        
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin-bottom: 2.5rem; line-height: 1.7; }
+        
+        .hero-image-wrapper { flex: 1; min-width: 300px; display: flex; justify-content: center; position: relative; }
+        .profile-container { 
+            width: clamp(220px, 25vw, 320px); height: clamp(220px, 25vw, 320px); border-radius: 30%; 
+            border: 2px solid var(--accent-1); 
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(0,0,0,0.5); 
+            overflow: hidden; background: var(--bg-card); 
+            display: flex; align-items: center; justify-content: center;
+            position: relative; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: none;
+        }
+        .profile-container:hover { transform: scale(1.05); box-shadow: 0 0 60px var(--particle); border-color: var(--accent-2); }
+        .profile-img-placeholder { color: var(--accent-1); font-family: 'Fira Code', monospace; text-align: center; opacity: 0.6; z-index: 2; position: absolute; pointer-events: none; padding: 1rem;}
+        .profile-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 1; transition: opacity 0.3s; }
+        .profile-container:hover .profile-image { opacity: 1; }
+
+        .btn { display: inline-flex; padding: 14px 28px; background: transparent; color: var(--text-main); border: 1px solid var(--accent-1); border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.9rem; font-weight: 500; position: relative; overflow: hidden; transition: all 0.3s; z-index: 1; text-decoration: none; align-items: center; gap: 8px; cursor: pointer;}
+        .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); z-index: -1; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .btn:hover::before { width: 100%; }
+        .btn:hover { color: #fff; box-shadow: 0 10px 20px -10px var(--accent-1); border-color: transparent; }
+
+        .topbar {
+            position: sticky; top: 0; z-index: 70; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            background: rgba(2, 6, 12, 0.3); border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+        }
+        .topbar .container {
+            padding-right: 0;
+        }
+        .nav-shell {
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px;
+            flex-wrap: nowrap;
+        }
+        .nav-brand {
+            font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-main);
+            font-weight: 600; opacity: 0.9; white-space: nowrap;
+        }
+        .nav-links {
+            display: flex; align-items: center; justify-content: flex-end; gap: 1.4rem; flex-wrap: wrap; margin-left: auto;
+            min-width: 0;
+        }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.8rem;
+            transition: color 0.2s ease; white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--accent-1); }
+
+        .mini-stats {
+            display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; max-width: 780px;
+        }
+        .impact-card {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 1rem 1.1rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+        .impact-value { display: block; font-size: clamp(1.2rem, 2vw, 1.9rem); font-weight: 700; font-family: 'Fira Code', monospace; color: var(--text-main); }
+        .impact-label { display: block; margin-top: 0.35rem; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+
+        .about-strip {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.5rem; margin-top: 2.5rem; align-items: stretch;
+        }
+        .about-panel {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem 1.3rem; backdrop-filter: blur(8px);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        }
+        .about-panel h3 {
+            font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-1); margin-bottom: 0.85rem; font-family: 'Fira Code', monospace;
+        }
+        .about-panel p, .about-panel li {
+            color: var(--text-muted); line-height: 1.7; font-size: 0.96rem;
+        }
+        .about-panel ul {
+            padding-left: 1.1rem; display: grid; gap: 0.5rem;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .project-card {
+            padding: 1.4rem;
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--accent-1);
+            border-radius: 8px;
+            background: var(--bg-card);
+        }
+        .project-type {
+            color: var(--accent-1);
+            font: 0.72rem 'Fira Code', monospace;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .project-card h3 { margin: 0.7rem 0; font-size: 1.15rem; }
+        .project-card p { color: var(--text-muted); line-height: 1.65; font-size: 0.92rem; }
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem 0.8rem;
+            margin-top: 1.1rem;
+            color: var(--text-muted);
+            font: 0.72rem 'Fira Code', monospace;
+        }
+
+        /* --- INTERACTIVE AI CHAT UI --- */
+        .ai-chat-container {
+            background: linear-gradient(180deg, rgba(12, 17, 26, 0.96), rgba(9, 12, 19, 0.9));
+            border: 1px solid rgba(96, 165, 250, 0.28);
+            border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; height: 600px;
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 28px 70px rgba(2,6,23,0.55), 0 0 32px rgba(59,130,246,0.14);
+            position: relative; isolation: isolate;
+        }
+        .ai-chat-container::before {
+            content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 32%), radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.16), transparent 30%);
+            pointer-events: none; z-index: -1;
+        }
+        .ai-chat-container::after {
+            content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 28%, transparent 72%, rgba(255,255,255,0.02));
+            pointer-events: none;
+        }
+        @media (max-width: 768px) { .ai-chat-container { height: 500px; } }
+        
+        .chat-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(8,12,18,0.9), rgba(8,12,18,0.5)); position: relative; z-index: 1; }
+        .chat-header-left { display: flex; align-items: center; gap: 12px; }
+        .chat-header .status-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 12px rgba(34, 197, 94, 0.9); }
+        .chat-header-meta { display: flex; flex-direction: column; gap: 2px; }
+        .chat-header-meta .status-label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+        .clear-chat-btn { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; font-family: 'Fira Code'; padding: 4px 10px; border-radius: 999px; transition: all 0.3s; cursor: pointer; }
+        .clear-chat-btn:hover { color: var(--accent-2); border-color: var(--accent-2); background: rgba(255,255,255,0.04); box-shadow: 0 0 18px rgba(129, 140, 248, 0.22); }
+        
+        .chat-history { flex: 1; padding: 1.35rem 1.2rem 1.1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.1rem; scroll-behavior: smooth; position: relative; z-index: 1; }
+        .chat-history::-webkit-scrollbar { width: 6px; }
+        .chat-history::-webkit-scrollbar-track { background: transparent; }
+        .chat-history::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.4); border-radius: 999px; }
+        
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 0.95rem; line-height: 1.6; animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+        .msg.ai { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); align-self: flex-start; border-bottom-left-radius: 6px; color: var(--text-main); border: 1px solid rgba(148, 163, 184, 0.18); font-family: 'Inter', sans-serif; box-shadow: 0 14px 24px rgba(15,23,42,0.12), inset 0 0 0 1px rgba(56,189,248,0.05); }
+        .msg.user { background: linear-gradient(135deg, rgba(71, 176, 255, 0.18), rgba(129, 140, 248, 0.18)); align-self: flex-end; border-bottom-right-radius: 6px; color: var(--text-main); border: 1px solid rgba(96,165,250,0.4); font-family: 'Fira Code', monospace; box-shadow: 0 14px 24px rgba(59,130,246,0.12); }
+        .msg.ai strong { color: var(--accent-1); }
+        @keyframes slideInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .chat-input-area { padding: 1.1rem 1.2rem 1.25rem; border-top: 1px solid var(--border); background: linear-gradient(180deg, rgba(6,10,17,0.82), rgba(6,10,17,0.55)); display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+        .chat-status-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+        .agent-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.28); color: var(--text-main); border-radius: 999px; padding: 5px 10px; font-size: 0.72rem; font-family: 'Fira Code', monospace; }
+        .agent-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); }
+        .agent-subtext { color: var(--text-muted); font-size: 0.75rem; font-family: 'Inter', sans-serif; }
+        .chat-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chat-chip { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-family: 'Inter', sans-serif; transition: all 0.3s; cursor: pointer; }
+        .chat-chip:hover { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #041019; border-color: var(--accent-1); transform: translateY(-2px); font-weight: 600; box-shadow: 0 10px 18px rgba(56, 189, 248, 0.18); }
+        
+        .input-group { display: flex; gap: 10px; }
+        .input-group input { flex: 1; background: rgba(5, 10, 18, 0.9); border: 1px solid rgba(148, 163, 184, 0.25); color: var(--text-main); padding: 12px 16px; border-radius: 14px; font-family: 'Fira Code', monospace; font-size: 0.95rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s; }
+        .input-group input:focus { border-color: var(--accent-1); box-shadow: 0 0 0 3px rgba(56,189,248,0.11), 0 0 18px rgba(56,189,248,0.15); }
+        .input-group button { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #031018; border: none; padding: 0 20px; border-radius: 14px; font-size: 1.2rem; font-weight: bold; transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s; cursor: pointer; box-shadow: 0 12px 24px rgba(56,189,248,0.25); }
+        .input-group button:hover { opacity: 0.96; transform: translateY(-1px) scale(1.02); box-shadow: 0 16px 28px rgba(56,189,248,0.35); }
+
+        :root[data-theme="light"] .ai-chat-container {
+            background: linear-gradient(180deg, #ffffff, #f1f5f9);
+            border-color: rgba(15, 23, 42, 0.14);
+            box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+        }
+        :root[data-theme="light"] .ai-chat-container::before {
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 34%), radial-gradient(circle at bottom right, rgba(20, 184, 166, 0.08), transparent 32%);
+        }
+        :root[data-theme="light"] .ai-chat-container::after {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.025), transparent 35%, transparent 70%, rgba(15, 23, 42, 0.02));
+        }
+        :root[data-theme="light"] .chat-header {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 244, 248, 0.88));
+        }
+        :root[data-theme="light"] .clear-chat-btn,
+        :root[data-theme="light"] .chat-chip {
+            background: rgba(15, 23, 42, 0.035);
+        }
+        :root[data-theme="light"] .clear-chat-btn:hover,
+        :root[data-theme="light"] .chat-chip:hover {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #ffffff;
+        }
+        :root[data-theme="light"] .msg.ai,
+        :root[data-theme="light"] .typing-indicator {
+            background: linear-gradient(180deg, #ffffff, #f1f5f9);
+            border-color: rgba(15, 23, 42, 0.12);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+        }
+        :root[data-theme="light"] .msg.user {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.13), rgba(79, 70, 229, 0.1));
+            border-color: rgba(37, 99, 235, 0.28);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+        }
+        :root[data-theme="light"] .chat-input-area {
+            background: linear-gradient(180deg, rgba(240, 244, 248, 0.9), rgba(248, 250, 252, 0.96));
+        }
+        :root[data-theme="light"] .agent-badge {
+            background: rgba(37, 99, 235, 0.07);
+            border-color: rgba(37, 99, 235, 0.22);
+        }
+        :root[data-theme="light"] .input-group input {
+            background: #ffffff;
+            border-color: rgba(15, 23, 42, 0.2);
+            color: #0f172a;
+        }
+        :root[data-theme="light"] .input-group input::placeholder { color: #64748b; opacity: 1; }
+
+        .typing-indicator { display: inline-flex; gap: 4px; padding: 12px 16px; background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2); width: fit-content; border-bottom-left-radius: 6px; animation: slideInUp 0.3s ease forwards; box-shadow: 0 10px 18px rgba(0,0,0,0.15); }
+        .typing-indicator span { width: 6px; height: 6px; background: var(--accent-1); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        /* --- 3D Cards, Grids & Tags --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; padding: 1rem 0; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        
+        /* Staggered Delay for Cards */
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
+
+        .tilt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; display: flex; flex-direction: column;margin-bottom: 10px;}
+        .tilt-card:hover { border-color: var(--border-hover); box-shadow: 0 15px 30px -15px rgba(0,0,0,0.5); }
+        .card-content { transform: translateZ(30px); flex: 1; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+        .tag { font-size: 0.85rem; padding: 8px 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-family: 'Fira Code', monospace; transition: all 0.3s; cursor: pointer; }
+        .tag:hover { background: var(--border-hover); border-color: var(--accent-1); color: var(--bg-base); font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px var(--particle); }
+
+        /* --- Modern Timeline --- */
+        .timeline-wrapper { border-left: 2px solid var(--border-hover); padding-left: 2.5rem; margin-left: 1rem; }
+        .timeline-item { margin-bottom: 4rem; position: relative; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before { content:''; position: absolute; left: -3.1rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-base); border: 2px solid var(--accent-1); box-shadow: 0 0 10px var(--accent-1); transition: all 0.3s; }
+        .timeline-item:hover::before { background: var(--accent-1); transform: scale(1.2); }
+        .timeline-date { color: var(--accent-1); font-family: 'Fira Code'; font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
+        
+        /* --- AI GENERATIVE MODAL UI --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; display: flex; justify-content: center; align-items: center; padding: 1rem;}
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .ai-modal { background: var(--modal-bg); width: 100%; max-width: 600px; border: 1px solid var(--accent-1); border-radius: 12px; padding: 2.5rem; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(56, 189, 248, 0.15), inset 0 0 20px rgba(0,0,0,0.5); transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-height: 90vh;}
+        .modal-overlay.active .ai-modal { transform: scale(1) translateY(0); opacity: 1; }
+        
+        .ai-modal::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.05), transparent); transform: rotate(45deg); animation: scanline 4s linear infinite; pointer-events: none; }
+        
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+        .modal-close { background: transparent; border: none; color: var(--text-muted); font-size: 1.8rem; transition: color 0.2s, transform 0.2s; cursor: pointer;}
+        .modal-close:hover { color: var(--text-main); transform: rotate(90deg); }
+        
+        .modal-title { font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Fira Code', monospace; color: var(--text-main); display: flex; align-items: center; gap: 10px;}
+        .modal-title::before { content: '>'; color: var(--accent-1); }
+        
+        .modal-body-container { overflow-y: auto; flex: 1; padding-right: 10px;}
+        .modal-body-container::-webkit-scrollbar { width: 4px; }
+        .modal-body-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+        .modal-body { color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.95rem; line-height: 1.7; min-height: 60px;}
+        
+        .modal-code-wrapper { position: relative; margin-top: 1.5rem; opacity: 0; transition: opacity 0.5s ease;}
+        .modal-code-header { background: rgba(0,0,0,0.6); padding: 6px 12px; border-top-left-radius: 6px; border-top-right-radius: 6px; border: 1px solid var(--border); border-bottom: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--text-muted);}
+        .copy-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: inherit; transition: color 0.2s;}
+        .copy-btn:hover { color: var(--accent-1); }
+        
+        .modal-code-block { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; padding: 1.2rem; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-main); overflow-x: auto;}
+
+        /* --- Footer --- */
+        .glass-footer { background: var(--bg-card); border-top: 1px solid var(--border); backdrop-filter: blur(12px); padding: 3rem 2rem; margin-top: 4rem; text-align: center; position: relative;}
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap;}
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem; transition: color 0.3s; display: flex; align-items: center; gap: 8px;}
+        .footer-links a:hover { color: var(--accent-1); }
+
+        @media (max-width: 1024px) {
+            .nav-shell {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0.7rem 0;
+            }
+            .nav-brand {
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.7rem 1rem;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .theme-controls { max-width: calc(100vw - 24px); }
+        }
+
+        @media (max-width: 600px) {
+            .theme-switcher { margin-right: 16px; margin-bottom: 4px; }
+            .theme-controls {
+                display: grid;
+                grid-template-columns: repeat(6, 30px);
+                width: max-content;
+                gap: 6px;
+                padding: 9px;
+                border-radius: 14px;
+            }
+            .theme-controls-label {
+                grid-column: span 3;
+                align-self: center;
+                text-align: left;
+                padding: 0 0 0 4px;
+            }
+            .theme-dialog-close { grid-column: 4; margin-left: 0; }
+            .theme-btn {
+                width: 28px;
+                height: 28px;
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 720px) {
+            .nav-shell {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0.7rem 0;
+            }
+            .nav-brand {
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.7rem 1rem;
+            }
+            .nav-links a { font-size: 0.7rem; }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 1rem; }
+            section { padding: 3.5rem 0; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .topbar .container { padding-right: 1rem; }
+            .nav-shell { min-height: 0; padding: 1rem 0 0.7rem; }
+            .nav-links { gap: 0.65rem; }
+            .nav-links a { font-size: 0.68rem; }
+            .nav-brand { font-size: 0.77rem; letter-spacing: 0.06em; }
+            .mini-stats { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+            .about-strip { grid-template-columns: 1fr; }
+            .hero { display: grid; grid-template-columns: minmax(0, 1fr); min-height: auto; padding-top: 12px; gap: 1.25rem; text-align: center; }
+            .hero-content { display: contents; }
+            .hero-image-wrapper { min-width: 0; width: 100%; order: 3; }
+            .hero h1 { order: 1; font-size: clamp(2rem, 9vw, 3rem); overflow-wrap: normal; text-wrap: balance; }
+            .typewriter-wrapper { order: 2; justify-content: center; height: auto; min-height: 2.5rem; margin-bottom: 0; }
+            .hero-content > .typewriter-wrapper { order: 2; }
+            .hero h2 { font-size: clamp(1rem, 4.5vw, 1.35rem); }
+            .hero p { order: 4; width: 100%; max-width: 36rem; font-size: 1rem; margin: 0 auto 0.5rem; }
+            .hero-content > div { order: 5; width: 100%; justify-content: center; gap: 0.75rem; }
+            .hero-content > div .btn { flex: 1 1 145px; justify-content: center; min-height: 52px; padding: 12px 14px; }
+            .profile-container { width: min(68vw, 250px); height: min(68vw, 250px); }
+
+            h2.section-title { font-size: clamp(1.6rem, 7vw, 2rem); overflow-wrap: anywhere; }
+            .tilt-card { padding: 1.5rem; transform: none !important; }
+            .card-content { transform: none; }
+            .timeline-wrapper { margin-left: 0.35rem; padding-left: 1.5rem; }
+            .timeline-item::before { left: -2.1rem; }
+            .timeline-date { overflow-wrap: anywhere; line-height: 1.6; }
+            .timeline-item h3 { font-size: 1.15rem !important; }
+
+            .ai-chat-container { height: min(560px, 72svh); min-height: 420px; border-radius: 16px; }
+            .chat-header, .chat-history, .chat-input-area { padding: 1rem; }
+            .chat-header-left { min-width: 0; gap: 8px; }
+            .chat-header-meta .mono { font-size: 0.8rem !important; }
+            .chat-header-meta .status-label { font-size: 0.65rem; letter-spacing: 0.04em; }
+            .clear-chat-btn { flex-shrink: 0; padding: 6px 9px; }
+            .msg { max-width: 94%; padding: 10px 13px; font-size: 0.9rem; overflow-wrap: anywhere; }
+            .chat-status-bar { align-items: flex-start; flex-direction: column; }
+            .agent-subtext { line-height: 1.5; }
+            .chat-chips { flex-wrap: nowrap; overflow-x: auto; padding: 2px 0 8px; }
+            .chat-chip { flex: 0 0 auto; min-height: 38px; }
+            .input-group { gap: 8px; }
+            .input-group input { min-width: 0; width: 0; font-size: 16px; padding: 12px; }
+            .input-group button { min-width: 48px; min-height: 48px; padding: 0 14px; }
+
+            .ai-modal { padding: 1.25rem; max-height: 88svh; }
+            .modal-title { font-size: 1.15rem; overflow-wrap: anywhere; }
+            .modal-body { font-size: 0.85rem; }
+            .modal-code-block { padding: 0.85rem; font-size: 0.75rem; }
+            .modal-code-header { gap: 8px; }
+            .modal-code-header > span { min-width: 0; }
+            .toast { width: calc(100vw - 32px); justify-content: center; white-space: normal; text-align: center; font-size: 0.78rem; }
+            .footer-links { gap: 1rem; }
+            .footer-links a, .footer-links span { max-width: 100%; overflow-wrap: anywhere; justify-content: center; }
+        }
+
+        @media (max-width: 380px) {
+            .container { padding: 0 0.85rem; }
+            .nav-shell { padding: 1rem 0 0.7rem; }
+            .theme-controls { gap: 6px; padding: 7px; }
+            .hero { padding-top: 12px; }
+            .ai-chat-container { min-height: 400px; }
+            .chat-history { padding: 0.75rem; }
+            .chat-input-area { padding: 0.75rem; }
+            .tilt-card { padding: 1.2rem; }
+            .glass-footer { padding: 2rem 1rem; }
+        }
+
+        
+        /* --- Scroll Animation Logic --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Ensure animations aren't stripped if the user has motion sickness */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Canvas Background -->
+    <canvas id="particle-canvas"></canvas>
+    <div class="ambient-glow"></div>
+
+    <!-- Decorative Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="resume-toast">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Action: Downloading Milan_Kumar_Maharana.pdf...
+    </div>
+
+    <!-- AI Generative Modal -->
+    <div class="modal-overlay" id="ai-modal-overlay">
+        <div class="ai-modal" id="ai-modal">
+            <div class="modal-header">
+                <span class="mono" style="color: var(--accent-1); font-size: 0.85rem;">System.AI.ExplainContext()</span>
+                <button class="modal-close" id="close-modal" aria-label="Close modal">&times;</button>
+            </div>
+            <h3 class="modal-title" id="modal-title">Skill</h3>
+            
+            <div class="modal-body-container">
+                <div class="modal-body">
+                    <span id="modal-desc"></span><span class="hero-cursor" id="modal-cursor" style="height: 14px; width: 6px;"></span>
+                </div>
+                
+                <div class="modal-code-wrapper" id="modal-code-wrapper">
+                    <div class="modal-code-header">
+                        <span>Implementation Example</span>
+                        <button class="copy-btn" id="copy-code-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            Copy
+                        </button>
+                    </div>
+                    <div class="modal-code-block" id="modal-code"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="topbar reveal">
+        <div class="container nav-shell">
+            <div class="nav-brand mono">Milan<span class="gradient-text">/</span>Portfolio</div>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#matrix">Stack</a>
+                <a href="#ai-chat">AI Copilot</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher" id="theme-switcher">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Open color theme settings" aria-expanded="false" aria-controls="theme-controls" title="Color theme settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.5"></circle>
+                <path d="M12 2.5v3M12 18.5v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2.5 12h3M18.5 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"></path>
+            </svg>
+        </button>
+        <dialog class="theme-controls" id="theme-controls" aria-labelledby="theme-controls-title">
+        <span class="theme-controls-label" id="theme-controls-title">Color theme</span>
+        <button type="button" class="theme-dialog-close" id="theme-dialog-close" aria-label="Close color theme settings">&times;</button>
+        <button type="button" class="theme-btn" data-set="dark" aria-label="Dark theme" title="Dark (Default)"></button>
+        <button type="button" class="theme-btn" data-set="ocean" aria-label="Ocean theme" title="Ocean"></button>
+        <button type="button" class="theme-btn" data-set="aurora" aria-label="Aurora theme" title="Aurora"></button>
+        <button type="button" class="theme-btn" data-set="cyber" aria-label="Cyber theme" title="Cyber"></button>
+        <button type="button" class="theme-btn" data-set="synthwave" aria-label="Synthwave theme" title="Synthwave"></button>
+        <button type="button" class="theme-btn" data-set="sunset" aria-label="Sunset theme" title="Sunset"></button>
+        <button type="button" class="theme-btn" data-set="amber" aria-label="Amber theme" title="Amber"></button>
+        <button type="button" class="theme-btn" data-set="forest" aria-label="Forest theme" title="Forest"></button>
+        <button type="button" class="theme-btn" data-set="ruby" aria-label="Ruby theme" title="Ruby"></button>
+        <button type="button" class="theme-btn" data-set="rose" aria-label="Rose theme" title="Rose"></button>
+        <button type="button" class="theme-btn" data-set="citrus" aria-label="Citrus theme" title="Citrus"></button>
+        <button type="button" class="theme-btn" data-set="glacier" aria-label="Glacier theme" title="Glacier"></button>
+        <button type="button" class="theme-btn" data-set="graphite" aria-label="Graphite theme" title="Graphite"></button>
+        <button type="button" class="theme-btn" data-set="lagoon" aria-label="Lagoon theme" title="Lagoon"></button>
+        <button type="button" class="theme-btn" data-set="light" aria-label="Light theme" title="Light"></button>
+        </dialog>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero reveal">
+            <div class="hero-content">
+                <h1>Milan Kumar Maharana<span class="sys-cite"></span></h1>
+                
+                <!-- Dynamic Typewriter Subtitle -->
+                <div class="typewriter-wrapper">
+                    <h2 class="gradient-text mono" id="hero-typewriter">Senior Lead Engineer</h2><span class="hero-cursor"></span>
+                    <span class="sys-cite"></span>
+                </div>
+
+                <p>8+ years building enterprise software across BFSI, eCommerce, and CRM. I lead cloud-native delivery on AWS and build resilient APIs, microservices, and AI integrations with LLMs and RAG.<span class="sys-cite"></span></p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#projects" class="btn">View Selected Projects</a>
+                    <button class="btn" id="download-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Download Resume
+                    </button>
+                </div>
+
+                <div class="mini-stats" aria-label="Career statistics">
+                    <div class="impact-card">
+                        <span class="impact-value">8+</span>
+                        <span class="impact-label">Years</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">12</span>
+                        <span class="impact-label">Team Led</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">3</span>
+                        <span class="impact-label">Core Domains</span>
+                    </div>
+                    <div class="impact-card">
+                        <span class="impact-value">AI</span>
+                        <span class="impact-label">Focused</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <div class="profile-container">
+                    <img class="profile-image" src="profile.jpg" alt="Milan Kumar Maharana Profile Image">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal about-strip">
+            <div class="about-panel">
+                <h3>What I bring</h3>
+                <p>
+                    I combine enterprise delivery discipline with modern AI product thinking, helping organizations turn complex requirements into scalable software that performs under real-world pressure.
+                </p>
+            </div>
+            <div class="about-panel">
+                <h3>How I work</h3>
+                <ul>
+                    <li>Designs cloud-native systems and APIs for production scale.</li>
+                    <li>Leads engineering teams with a sharp focus on quality and speed.</li>
+                    <li>Integrates AI capabilities into business workflows without losing reliability.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Enterprise delivery across healthcare, banking, and AI-powered CRM.</p>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <span class="project-type">Healthcare · Team of 12</span>
+                    <h3>J&amp;J Vision</h3>
+                    <p>Leading architecture and delivery for ACUVUE and ophthalmology platforms, translating clinical and data-science needs into production software.</p>
+                    <div class="project-stack" aria-label="Technologies used">Spring Boot <span>React</span> <span>TypeScript</span> <span>Kubernetes</span> <span>Oracle</span></div>
+                </article>
+                <article class="project-card">
+                    <span class="project-type">Banking · Production systems</span>
+                    <h3>Deutsche Bank</h3>
+                    <p>Delivered mission-critical applications for corporate, private, and investment banking, with a focus on quality engineering and L3 production support.</p>
+                    <div class="project-stack" aria-label="Technologies used">Java 17+ <span>Spring Data JPA</span> <span>Oracle PL/SQL</span> <span>JUnit 5</span></div>
+                </article>
+                <article class="project-card">
+                    <span class="project-type">AI · Customer data platform</span>
+                    <h3>Orbyo AI CRM</h3>
+                    <p>Built core backend workflows for an automotive sales platform, including third-party data ingestion, lead scoring, geo-targeting, and sales insight widgets.</p>
+                    <div class="project-stack" aria-label="Technologies used">REST APIs <span>Spring Batch</span> <span>Lead scoring</span> <span>Geo-targeting</span></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Fully Interactive AI Chat UI -->
+        <section class="reveal" id="ai-chat">
+            <h2 class="section-title">AI <span class="gradient-text">Profile Copilot</span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Ask anything about my resume. Type your question below or select a quick query.<span class="sys-cite"></span></p>
+            
+            <div class="ai-chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-left">
+                        <div class="status-dot"></div>
+                        <div class="chat-header-meta">
+                            <span class="mono" style="font-size: 0.9rem;">Milan_AI_Agent</span>
+                            <span class="status-label">Profile-aware · AI connected when configured</span>
+                        </div>
+                    </div>
+                    <button class="clear-chat-btn" id="clear-chat" aria-label="Clear chat history">Clear Chat</button>
+                </div>
+                
+                <div class="chat-history" id="chat-history">
+                    <div class="msg ai">Hello! I'm Milan's profile assistant. Before we begin, what should I call you? You can ask about Milan's experience, projects, skills, AI work, leadership, awards, or contact details.<span class="sys-cite"></span></div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="chat-status-bar">
+                        <span class="agent-badge">Profile Assistant</span>
+                        <span class="agent-subtext">Resume-grounded answers • Multi-topic questions • Session memory</span>
+                    </div>
+                    <div class="chat-chips">
+                        <button class="chat-chip">Where has he worked?</button>
+                        <button class="chat-chip">What is his tech stack?</button>
+                        <button class="chat-chip">How strong is his AI leadership?</button>
+                        <button class="chat-chip">Is he a good fit for senior roles?</button>
+                        <button class="chat-chip">How can I contact him?</button>
+                        <button class="chat-chip">Show me his main projects.</button>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="chat-input" placeholder="Ask about his experience, stack, AI work, leadership, or hiring fit..." aria-label="Chat input">
+                        <button id="chat-send" aria-label="Send message">&#8594;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPANDED 3D Interactive Skills Grid (With Staggered Reveal) -->
+        <section class="reveal" id="matrix">
+            <h2 class="section-title">Complete <span class="gradient-text">Technical Matrix</span><span class="sys-cite"></span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">* Comprehensive skill inventory parsed from resume. Click any tag to initialize AI analysis.</p>
+
+            <div class="grid">
+                <!-- AI / Vector DBs Card -->
+                <div class="tilt-card reveal delay-1">
+                    <div class="card-content">
+                        <h3 class="mono">AI, ML & Vector DBs<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">Generative models and context architecture.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="Spring AI" data-desc="Seamlessly integrates generative AI capabilities directly into Spring Boot microservices." data-code="ChatClient chatClient = builder.build();">Spring AI<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="OpenAI API" data-desc="Integrates OpenAI models for deep NLP processing and dynamic generative tasks." data-code="openai.createChatCompletion(...)">OpenAI API<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Google Vertex AI" data-desc="Leverages Google's enterprise platform for orchestrating scalable machine learning models." data-code="VertexAI vertex = new VertexAI(project, location);">Vertex AI<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Ollama" data-desc="Deploys and manages powerful open-source LLMs locally for zero-latency inference." data-code="ollama run llama3">Ollama<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="MCP Server" data-desc="Implements Model Context Protocol to securely provide real-time enterprise data to LLMs." data-code="MCP_Server.initialize(context);">MCP Server<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="LLM Clients & RAG" data-desc="Architects full Retrieval-Augmented Generation pipelines using custom LLM clients." data-code="Retriever.retrieve(query).augment(prompt);">LLM Clients / RAG<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Vector Databases" data-desc="High-dimensional semantic storage using PGVector, Pinecone, MongoDB Atlas, and Chroma." data-code="ORDER BY embed <-> '[...]' LIMIT 5;">PGVector / Pinecone<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Chroma / Atlas" data-desc="Utilizes Chroma and MongoDB Atlas for flexible, scalable vector search integrations." data-code="collection.query({ queryEmbeddings: [...] });">Chroma / Atlas<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages & Frontend Card -->
+                <div class="tilt-card reveal delay-2">
+                    <div class="card-content">
+                        <h3 class="mono">Languages & Frontend<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">Core programming and client-side UI.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="Java (Core, Collections, Streams)" data-desc="8+ years of writing clean, enterprise-grade code leveraging core Java, Collections, and Streams for optimized logic." data-code="list.stream().filter(i -> i.isActive()).toList();">Java (Core/Streams)<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="JavaScript & TypeScript" data-desc="Builds dynamic, type-safe client-side logic using modern JS (ES6+) and TypeScript." data-code="const data: User[] = await fetchUsers();">JavaScript / TypeScript<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Basic React" data-desc="Develops responsive, component-based UIs and client-side web applications using React." data-code="const App = () => <div>UI Component</div>;">React<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="HTML5 & CSS3" data-desc="Structures and styles modern, responsive web pages utilizing HTML5, CSS3, and Responsive Design principles." data-code="@media (max-width: 768px) { .grid { flex: 1; } }">HTML5 / CSS3<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="JSP & Thymeleaf" data-desc="Generates dynamic, server-side rendered HTML content seamlessly integrating with Spring controllers." data-code="<span th:text='${user.name}'></span>">JSP / Thymeleaf<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Responsive Design" data-desc="Ensures interfaces perform seamlessly across all devices and screen sizes." data-code="display: grid; grid-template-columns: repeat(...)">Responsive Design<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spring & Architecture Card -->
+                <div class="tilt-card reveal delay-3">
+                    <div class="card-content">
+                        <h3 class="mono">Spring & Architecture<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">Microservices and Spring Ecosystem.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="Spring Framework & Boot" data-desc="Architects applications with Spring Boot Starters, Auto Configuration, and Spring Boot DevTools." data-code="@SpringBootApplication">Spring Boot/Framework<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Spring Cloud & Config" data-desc="Manages distributed systems leveraging Spring Cloud Config and external Configuration Management (YAML/Properties)." data-code="spring.config.import=configserver:URL">Spring Cloud / Config<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="API Gateway & Eureka" data-desc="Implements Request Routing, Rate Limiting, API Aggregation (Gateway) and Service Discovery (Eureka) with Client-Side Load Balancing." data-code="spring.cloud.gateway.routes[0].id=service">Gateway / Eureka<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="REST API & Inter-Service Comm." data-desc="Develops REST APIs (GET, POST, PUT, DELETE, PATCH) handling Status Codes (1xx-5xx). Uses RestTemplate, OpenFeign, WebClient (Reactive), RestClient, and HTTP Interfaces." data-code="@FeignClient(name = 'inventory-service')">REST / WebClient / Feign<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Microservices Patterns" data-desc="Applies advanced Microservices Design Patterns, including Synchronous/Asynchronous comms and Multi-tenancy implementation." data-code="// Implementing Saga Pattern for distributed transactions">Microservices Patterns<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Resilience & Fault Tolerance" data-desc="Uses Resilience4j (Circuit Breaker, Retry, Rate Limiter, Bulkhead), Timeout Management, Graceful Degradation, and Fallback Strategies." data-code="@CircuitBreaker(name = 'service', fallbackMethod = 'fb')">Resilience4j<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DB, ORM & Messaging Card -->
+                <div class="tilt-card reveal delay-4">
+                    <div class="card-content">
+                        <h3 class="mono">Databases & Messaging<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">Data persistence and event streams.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="Relational Databases" data-desc="Extensive experience in Schema Design and Transaction Management for MySQL, Oracle, and PostgreSQL." data-code="CREATE TABLE users (...); \n@Transactional">MySQL / Oracle / PGSQL<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="MongoDB" data-desc="Manages scalable, schema-less NoSQL document storage." data-code="db.collection.createIndex({ 'field': 1 });">MongoDB<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="ORM & Data Access" data-desc="Utilizes Spring Data JPA, Hibernate, and JDBC for efficient mapping and optimized querying." data-code="@Entity \npublic class User { @Id private Long id; }">JPA / Hibernate / JDBC<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Apache Kafka" data-desc="Builds Event-Driven Architectures utilizing Event Streaming, Topics, and Partitions in Kafka." data-code="kafkaTemplate.send('myTopic', eventPayload);">Apache Kafka<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="RabbitMQ" data-desc="Implements Message Queue Patterns using Direct, Fanout, and Topic Exchanges in RabbitMQ." data-code="rabbitTemplate.convertAndSend(exchange, routingKey, msg);">RabbitMQ<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Spring Cloud Stream" data-desc="Abstracts complex messaging middlewares for seamless event processing." data-code="@StreamListener(Processor.INPUT)">Spring Cloud Stream<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud, DevOps & Observability Card -->
+                <div class="tilt-card reveal delay-5">
+                    <div class="card-content">
+                        <h3 class="mono">DevOps & Observability<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">CI/CD, Cloud, and Tracing.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="AWS (EC2, S3)" data-desc="Deploys and scales high-availability production workloads on Amazon Web Services compute and storage infrastructure." data-code="aws s3 sync ./build s3://my-bucket">AWS (EC2 / S3)<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Docker Infrastructure" data-desc="Builds Images, Containers, Dockerfiles, and manages multi-container deployments using DockerCompose and Docker Registry." data-code="docker build -t app . \ndocker-compose up -d">Docker Ecosystem<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="CI/CD & Version Control" data-desc="Maintains automated DevOps pipelines using Git, Maven, Jenkins, and GitLab CI/CD." data-code="mvn clean install \n// Jenkinsfile pipeline steps">Git / Maven / Jenkins<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Distributed Tracing" data-desc="Tracks requests across microservices via distributed tracing tools like Zipkin and Jaeger." data-code="management.tracing.sampling.probability=1.0">Zipkin / Jaeger<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Monitoring & Actuator" data-desc="Monitors applications via Spring Boot Actuator Endpoints (/health, /metrics, /info), robust Logging (Log4J), and Health Checks." data-code="management.endpoints.web.exposure.include=*">Actuator / Log4J<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security, Testing & Tools Card -->
+                <div class="tilt-card reveal delay-6">
+                    <div class="card-content">
+                        <h3 class="mono">Security & Testing<span class="sys-cite"></span></h3>
+                        <p style="color: var(--text-muted); margin-top: 0.8rem; font-size: 0.9rem;">Quality assurance and authentication.<span class="sys-cite"></span></p>
+                        <div class="tag-container">
+                            <button class="tag" data-title="Authentication Protocols" data-desc="Secures APIs via OAuth 2.0 (Authorization Code, Client Credentials), OIDC (OpenID Connect), and JWT Tokens." data-code="http.oauth2ResourceServer(jwt());">OAuth 2.0 / OIDC / JWT<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Identity & Access" data-desc="Implements Spring Security, Role-Based Access Control (RBAC), Password Encryption (BCrypt), Keycloak Integration, and OKTA." data-code="@PreAuthorize('hasRole(\'ADMIN\')')">Spring Security/Keycloak<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Testing Frameworks" data-desc="Ensures code reliability through comprehensive Unit Testing and Integration Testing using JUnit 5 and Mockito." data-code="@Test \nwhen(repo.findById(1)).thenReturn(mockEntity);">JUnit 5 / Mockito<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="Architecture Quality" data-desc="Strictly adheres to SOLID Principles, Clean Code concepts, and structural Design Patterns." data-code="// Implementing Factory and Strategy Patterns">SOLID / Clean Code<span class="sys-cite"></span></button>
+                            <button class="tag" data-title="IDEs & Tools" data-desc="Develops efficiently utilizing Eclipse, IntelliJ IDEA, Spring Tool Suite (STS), and dedicated Monitoring Tools." data-code="// IDE configuration and debug profiles">IntelliJ / STS / Eclipse<span class="sys-cite"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Deep-Dive Experience Timeline -->
+        <section class="reveal" id="experience">
+            <h2 class="section-title">Enterprise <span class="gradient-text">Deployments</span><span class="sys-cite"></span></h2>
+            <div class="timeline-wrapper">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">Sep 2022 - Present | TATA Consultancy Services<span class="sys-cite"></span></span>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">IT Analyst (Lead Engineer - J&J Vision)<span class="sys-cite"></span></h3>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+                        Leading a team of 12 to architect scalable server-side applications for Johnson & Johnson Vision, a global leader in eye health specializing in ACUVUE® contact lenses and surgical ophthalmology (myopia, dry eye, cataracts)<span class="sys-cite"></span>. 
+                        Translated complex business requirements from clinical experts and data scientists into technical specifications<span class="sys-cite"></span>. Managed end-to-end lifecycles using Docker, Kubernetes, and CI/CD, while optimizing high-performance Oracle DBs and building responsive front-ends with React and TypeScript<span class="sys-cite"></span>.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">Jul 2021 - Sep 2022 | HCL Technologies<span class="sys-cite"></span></span>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Senior Software Engineer (Deutsche Bank)<span class="sys-cite"></span></h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        Engineered mission-critical web applications for Deutsche Bank's Corporate, Private, and Investment banking networks in a team of 15<span class="sys-cite"></span>. 
+                        Leveraged Java 17+, Spring Data JPA, and Oracle PL/SQL<span class="sys-cite"></span>. Enforced rigorous quality standards through Test Driven Development (TDD) and Behavior Driven Development (BDD) using JUnit 5 and Mockito<span class="sys-cite"></span>. Provided direct L3 support for critical production issues, executing root-cause analysis to ensure zero downtime<span class="sys-cite"></span>.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">Nov 2018 - Jun 2021 | LeadIcon Technologies<span class="sys-cite"></span></span>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Staff Engineer (Orbyo AI CRM)<span class="sys-cite"></span></h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        Developed core backend functionalities for Orbyo, an AI-powered Customer Data Platform (CDP) designed to accelerate sales in industries like automotive via lead scoring and geo-targeting<span class="sys-cite"></span>. 
+                        Created RESTful APIs to ingest third-party data, implemented Spring Batch for processing large data imports, and built real-time UI insight widgets for sales teams<span class="sys-cite"></span>.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Awards & Soft Skills Matrix -->
+        <section class="reveal">
+            <h2 class="section-title">Competencies & <span class="gradient-text">Recognition</span><span class="sys-cite"></span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">* Click on any competency or award to view its contextual application.</p>
+            <div class="grid-2">
+                
+                <div class="tilt-card" style="padding: 2.5rem;">
+                    <h3 class="mono" style="margin-bottom: 1.5rem; color: var(--accent-1);">Core Competencies<span class="sys-cite"></span></h3>
+                    <div class="tag-container">
+                        <button class="tag" data-title="Leadership" data-desc="Recognized for mentoring teams, driving technical excellence, and helping organizations adopt modern cloud and AI-driven architectures to accelerate innovation." data-code="// Mentoring cross-functional teams of 10+ engineers">Leadership<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Agile / Scrum" data-desc="Proven track record of delivering production-ready solutions through Agile development practices, including sprint planning, daily stand-ups, and retrospectives using Jira." data-code="agile.runSprint(2); // Two-week delivery cycles">Agile / Scrum<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Critical Thinking" data-desc="Expert in identifying, triaging, and resolving software defects and performance bottlenecks in production environments using deep root-cause analysis." data-code="System.analyze(rootCause); // Resolving L3 production bugs">Critical Thinking<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Cross-functional Teamwork" data-desc="Extensive experience collaborating seamlessly with UX/UI designers, product managers, clinical experts, and data scientists to translate business needs into technical specs." data-code="team.collaborate(UX, DataScience, PM); // Bridging gaps">Teamwork<span class="sys-cite"></span></button>
+                    </div>
+                </div>
+
+                <div class="tilt-card" style="padding: 2.5rem;">
+                    <h3 class="mono" style="margin-bottom: 1.5rem; color: var(--accent-1);">TCS Achievements<span class="sys-cite"></span></h3>
+                    <div class="tag-container">
+                        <button class="tag" data-title="Xcelerate Victor Certificate" data-desc="Awarded the prestigious Xcelerate Victor Certificate at TATA Consultancy Services Ltd in 2026 for exceptional performance and continuous upskilling in modern enterprise architecture." data-code="achievement.unlock('Xcelerate Victor'); // 2026">Xcelerate Victor (2026)<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="tcsAl Spark Certificate" data-desc="Earned the tcsAl Spark certificate at TATA Consultancy Services Ltd in 2025, validating expertise and successful implementation of modern AI and LLM solutions." data-code="cert.verify('tcsAl Spark'); // AI capabilities validated">tcsAl Spark (2025)<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Feedback Enabler Certificate" data-desc="Awarded the Feedback Enabler certificate at TCS in 2025 for fostering a culture of continuous improvement, thorough peer code reviews, and constructive team mentoring." data-code="team.provideFeedback(constructive); // Code reviews">Feedback Enabler (2025)<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Service & Commitment Award" data-desc="Received the Service & Commitment Award at TCS in 2025, recognizing deep dedication to delivering highly scalable, production-ready solutions for global clients." data-code="award.grant('Service & Commitment'); // Dedication">Service & Commitment (2025)<span class="sys-cite"></span></button>
+                        <button class="tag" data-title="Xcelerate Warrior Certificate" data-desc="Earned the Xcelerate Warrior certificate at TATA Consultancy Services Ltd in 2024 for demonstrating strong technical capability and rapid project delivery." data-code="achievement.unlock('Xcelerate Warrior'); // 2024">Xcelerate Warrior (2024)<span class="sys-cite"></span></button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Glowing Footer Section -->
+    <footer class="glass-footer" id="contact">
+        <div class="container">
+            <div class="footer-links">
+                <a href="mailto:milankm.official@gmail.com">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    milankm.official@gmail.com<span class="sys-cite"></span>
+                </a>
+                <a href="tel:+919078993767">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    (+91) 907-899-3767<span class="sys-cite"></span>
+                </a>
+                <a href="https://www.LinkedIn.com/in/milankm" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    LinkedIn Profile<span class="sys-cite"></span>
+                </a>
+                <span style="color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Bengaluru, Karnataka, India<span class="sys-cite"></span>
+                </span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; font-family: 'Fira Code', monospace;">&copy; 2026 Milan Kumar Maharana</p>
+        </div>
+    </footer>
+
+    <script src="model.js"></script>
+    <script>
+        // --- 1. Dynamic Hero Typewriter ---
+        const roles = ["Senior Lead Engineer", "Cloud-Native Architect", "AI Integration Specialist", "Software Development Engineer", "Technical Lead", "Full-Stack Developer", "Microservices Expert", "Spring Boot Specialist", "Distributed Systems Architect", "Enterprise Solutions Consultant", "Vector Database & LLM Engineer", "Generative AI Developer", "Critical Thinking Problem Solver", "Leadership & Mentorship Coach", "Continuous Improvement Champion", "Innovative Technology Strategist", "Software Performance Optimizer", "Cloud Infrastructure Designer", "Observability & Monitoring Specialist", "Security & Authentication Expert", "Messaging & Event-Driven Architect", "Front-End UI/UX Developer", "Back-End API Senior Developer", "Enterprise Deployment Lead", "Solution Design & Architecture Consultant"];
+        let roleIndex = 0; let charIndex = 0; let isDeleting = false;
+        const typewriterEl = document.getElementById('hero-typewriter');
+        
+        function typeHero() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typingSpeed = isDeleting ? 40 : 80;
+            if (!isDeleting && charIndex === currentRole.length) {
+                typingSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 500; // Pause before new word
+            }
+            setTimeout(typeHero, typingSpeed);
+        }
+        setTimeout(typeHero, 1000);
+
+        // --- 2. Decorative Custom Cursor ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            if(window.innerWidth > 768) {
+                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 400, fill: "forwards" });
+            }
+        });
+
+        // Theme Switcher
+        function updateThemeSelection(selectedTheme) {
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                const isSelected = btn.getAttribute('data-set') === selectedTheme;
+                btn.classList.toggle('active', isSelected);
+                btn.setAttribute('aria-pressed', String(isSelected));
+            });
+        }
+
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeDialog = document.getElementById('theme-controls');
+        function setThemeToggleExpanded(isExpanded) {
+            themeToggle.setAttribute('aria-expanded', String(isExpanded));
+            themeToggle.setAttribute('aria-label', `${isExpanded ? 'Close' : 'Open'} color theme settings`);
+        }
+        function closeThemeDialog() {
+            if (themeDialog.open) themeDialog.close();
+            setThemeToggleExpanded(false);
+            themeToggle.focus();
+        }
+        function positionThemeDialog() {
+            const toggleRect = themeToggle.getBoundingClientRect();
+            const dialogRect = themeDialog.getBoundingClientRect();
+            const margin = 12;
+            const gap = 8;
+            const leftCandidate = toggleRect.left - dialogRect.width - gap;
+            if (leftCandidate >= margin) {
+                const top = Math.min(
+                    Math.max(margin, toggleRect.top + (toggleRect.height - dialogRect.height) / 2),
+                    Math.max(margin, window.innerHeight - dialogRect.height - margin)
+                );
+                themeDialog.style.left = `${leftCandidate}px`;
+                themeDialog.style.right = 'auto';
+                themeDialog.style.top = `${top}px`;
+                return;
+            }
+            const belowTop = toggleRect.bottom + 8;
+            const top = belowTop + dialogRect.height <= window.innerHeight - margin
+                ? belowTop
+                : Math.max(margin, toggleRect.top - dialogRect.height - 8);
+            themeDialog.style.left = 'auto';
+            themeDialog.style.top = `${top}px`;
+            themeDialog.style.right = `${Math.max(margin, window.innerWidth - toggleRect.right)}px`;
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (themeDialog.open) return;
+            themeDialog.showModal();
+            positionThemeDialog();
+            setThemeToggleExpanded(true);
+            themeDialog.querySelector('.theme-btn.active')?.focus();
+        });
+        window.addEventListener('resize', () => {
+            if (themeDialog.open) positionThemeDialog();
+        });
+
+        themeDialog.addEventListener('close', () => closeThemeDialog());
+        themeDialog.addEventListener('cancel', event => {
+            event.preventDefault();
+            closeThemeDialog();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && themeDialog.open) {
+                event.preventDefault();
+                closeThemeDialog();
+            }
+        });
+        themeDialog.addEventListener('click', event => {
+            if (event.target === themeDialog) closeThemeDialog();
+        });
+        document.getElementById('theme-dialog-close').addEventListener('click', closeThemeDialog);
+
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-set');
+                document.documentElement.setAttribute('data-theme', theme);
+                updateThemeSelection(theme);
+                updateCanvasColors();
+                closeThemeDialog();
+            });
+        });
+
+        updateThemeSelection(document.documentElement.getAttribute('data-theme') || 'dark');
+
+        // --- Resume Download Toast ---
+        document.getElementById('download-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const toast = document.getElementById('resume-toast');
+            toast.classList.add('show');
+
+            const resumeUrl = 'Milan_Kumar_Maharana.pdf';
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.download = 'Milan_Kumar_Maharana.pdf';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+        });
+
+        // --- 3. AI GENERATIVE MODAL LOGIC (With Copy Button) ---
+        const aiModalOverlay = document.getElementById('ai-modal-overlay');
+        const mTitle = document.getElementById('modal-title');
+        const mDesc = document.getElementById('modal-desc');
+        const mCode = document.getElementById('modal-code');
+        const mCodeWrapper = document.getElementById('modal-code-wrapper');
+        const mCursor = document.getElementById('modal-cursor');
+        const copyBtn = document.getElementById('copy-code-btn');
+        let currentCodeText = "";
+        let typingTimeout;
+
+        function typeWriterEffect(text, index) {
+            if (index < text.length) {
+                mDesc.textContent += text.charAt(index);
+                let delay = Math.random() * 25 + 10;
+                typingTimeout = setTimeout(() => typeWriterEffect(text, index + 1), delay);
+            } else {
+                mCursor.style.display = "none";
+                if(currentCodeText) mCodeWrapper.style.opacity = "1";
+            }
+        }
+
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                const target = e.currentTarget;
+                const titleStr = target.getAttribute('data-title');
+                const descStr = target.getAttribute('data-desc');
+                currentCodeText = target.getAttribute('data-code');
+
+                clearTimeout(typingTimeout);
+                mTitle.textContent = titleStr;
+                mDesc.textContent = "";
+                mCodeWrapper.style.opacity = "0";
+                mCode.innerHTML = currentCodeText.replace(/\\n/g, '<br>');
+                mCursor.style.display = "inline-block";
+                copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+                
+                aiModalOverlay.classList.add('active');
+                setTimeout(() => { typeWriterEffect(descStr, 0); }, 300);
+            });
+        });
+
+        // Copy Button Logic
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(currentCodeText.replace(/\\n/g, '\n'));
+            copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+            }, 2000);
+        });
+
+        const closeAiModal = () => { 
+            aiModalOverlay.classList.remove('active'); 
+            clearTimeout(typingTimeout);
+        };
+        document.getElementById('close-modal').addEventListener('click', closeAiModal);
+        aiModalOverlay.addEventListener('click', (e) => {
+            if(e.target === aiModalOverlay) closeAiModal();
+        });
+
+        // --- 4. Scroll Reveal & Tilt Cards (With Staggering) ---
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal); reveal();
+
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if(window.innerWidth > 768) {
+                    const rect = card.getBoundingClientRect();
+                    const rotateX = (((e.clientY - rect.top) - (rect.height / 2)) / (rect.height / 2)) * -6; 
+                    const rotateY = (((e.clientX - rect.left) - (rect.width / 2)) / (rect.width / 2)) * 6;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transition = 'transform 0.5s';
+            });
+            card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
+        });
+
+        // --- 5. Interactive NLP AI Chat Logic ---
+        const chatHistory = document.getElementById('chat-history');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send');
+        const clearChatBtn = document.getElementById('clear-chat');
+        const initialAiMessage = document.querySelector('.msg.ai').outerHTML;
+        let chatGeneration = 0;
+
+        function processUserMessage(text) {
+            if (!text.trim()) return;
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.textContent = text;
+            chatHistory.appendChild(userMsg);
+            chatInput.value = '';
+
+            const typing = document.createElement('div');
+            typing.className = 'typing-indicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            chatHistory.appendChild(typing);
+            chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
+
+            const generation = chatGeneration;
+
+            setTimeout(async () => {
+                const aiResponseText = await MilanProfileModel.getSmartResponse(text);
+                if (generation !== chatGeneration || !typing.isConnected) return;
+                chatHistory.removeChild(typing);
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg ai';
+                aiMsg.textContent = aiResponseText;
+                chatHistory.appendChild(aiMsg);
+                chatHistory.scrollTo({ top: chatHistory.scrollHeight, behavior: 'smooth' });
+            }, 700 + Math.random() * 700);
+        }
+
+        document.querySelectorAll('.chat-chip').forEach(chip => {
+            chip.addEventListener('click', (e) => processUserMessage(e.target.textContent));
+        });
+        chatSendBtn.addEventListener('click', () => processUserMessage(chatInput.value));
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') processUserMessage(chatInput.value); });
+        
+        clearChatBtn.addEventListener('click', () => {
+            chatGeneration += 1;
+            chatHistory.innerHTML = initialAiMessage;
+            MilanProfileModel.resetConversation();
+        });
+
+        // --- 6. Animated Canvas Particles ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let mouse = { x: null, y: null, radius: 120 };
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        class Particle {
+            constructor(x, y, dirX, dirY, size, color) {
+                this.x = x; this.y = y; this.dirX = dirX; this.dirY = dirY; this.size = size; this.color = color;
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.dirX = -this.dirX;
+                if (this.y > canvas.height || this.y < 0) this.dirY = -this.dirY;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                if (Math.sqrt(dx*dx + dy*dy) < mouse.radius + this.size) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+                }
+                this.x += this.dirX * 0.5; this.y += this.dirY * 0.5; this.draw();
+            }
+        }
+        function getParticleColor() {
+            const particleColor = getComputedStyle(document.documentElement).getPropertyValue('--particle').trim();
+            return particleColor || 'rgba(56, 189, 248, 0.2)';
+        }
+        function initCanvas() {
+            particlesArray = []; let count = (canvas.height * canvas.width) / 12000;
+            let color = getParticleColor();
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle(
+                    Math.random() * canvas.width, Math.random() * canvas.height,
+                    (Math.random() * 2) - 1, (Math.random() * 2) - 1,
+                    (Math.random() * 1.5) + 0.5, color
+                ));
+            }
+        }
+        function connectParticles() {
+            let color = getParticleColor();
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let dist = (dx*dx) + (dy*dy);
+                    if (dist < (canvas.width/8) * (canvas.height/8)) {
+                        ctx.strokeStyle = color.replace(/[^,]+(?=\))/, (0.5 - dist/40000).toString());
+                        ctx.lineWidth = 0.5; ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+        function animateCanvas() {
+            requestAnimationFrame(animateCanvas);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            particlesArray.forEach(p => p.update());
+            connectParticles();
+        }
+        function updateCanvasColors() {
+            let newColor = getParticleColor();
+            particlesArray.forEach(p => p.color = newColor);
+        }
+        window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+        initCanvas(); animateCanvas();
+    </script>
+</body>
+</html>
