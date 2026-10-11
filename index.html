@@ -811,6 +811,22 @@
                         <span class="impact-value">AI</span>
                         <span class="impact-label">Focused</span>
                     </div>
+                    <div class="impact-card" aria-label="Simulated active visitor count">
+                        <span class="impact-value" id="visitor-count" aria-live="polite">---</span>
+                        <span class="impact-label">Active now</span>
+                    </div>
+                    <div class="impact-card" aria-label="Simulated visits today">
+                        <span class="impact-value" id="visitor-today-count" aria-live="polite">---</span>
+                        <span class="impact-label">Visits Today</span>
+                    </div>
+                    <div class="impact-card" aria-label="Simulated returning visitor rate">
+                        <span class="impact-value" id="visitor-return-rate" aria-live="polite">---</span>
+                        <span class="impact-label">Returning</span>
+                    </div>
+                    <div class="impact-card" aria-label="Resume views">
+                        <span class="impact-value" id="resume-download-count" aria-live="polite">---</span>
+                        <span class="impact-label" id="resume-download-count-label">Resume Views</span>
+                    </div>
                 </div>
             </div>
             
@@ -1116,25 +1132,36 @@
                 : null;
             if (!target) return;
 
-            const href = target instanceof HTMLAnchorElement ? target.getAttribute('href') : null;
+            const isLink = target instanceof HTMLAnchorElement;
+            const href = isLink ? target.getAttribute('href') : null;
             const contactMethod = href?.startsWith('mailto:')
                 ? 'email'
                 : href?.startsWith('tel:')
                     ? 'phone'
                     : null;
-            const isChatPrompt = target.classList.contains('chat-chip');
             const sectionName = href?.startsWith('#') ? href.slice(1) : null;
+            const downloadedFile = isLink && target.hasAttribute('download')
+                ? target.getAttribute('download') || href?.split('/').pop()?.split('?')[0]
+                : null;
+            const externalLink = isLink && href && !sectionName && !contactMethod && !downloadedFile
+                ? target.hostname !== '' && target.origin !== window.location.origin
+                : false;
             const eventName = contactMethod
                 ? 'contact_link_click'
-                : target instanceof HTMLAnchorElement && target.hasAttribute('download')
-                    ? 'file_download_click'
+                : downloadedFile
+                    ? 'file_download'
                     : sectionName
                         ? 'navigation_click'
-                        : 'ui_interaction';
+                        : externalLink
+                            ? 'outbound_link_click'
+                            : 'button_click';
             const label = target.getAttribute('aria-label')
-                || (target instanceof HTMLAnchorElement && contactMethod
+                || target.id
+                || target.getAttribute('data-title')
+                || target.getAttribute('data-set')
+                || (contactMethod
                     ? undefined
-                    : isChatPrompt
+                    : target.classList.contains('chat-chip')
                         ? 'Quick prompt'
                         : target.textContent.trim().replace(/\s+/g, ' ').slice(0, 80));
 
@@ -1143,7 +1170,9 @@
                 element_id: target.id || undefined,
                 element_label: label || undefined,
                 section_name: sectionName || undefined,
-                contact_method: contactMethod || undefined
+                contact_method: contactMethod || undefined,
+                file_name: downloadedFile || undefined,
+                link_domain: externalLink ? target.hostname : undefined
             });
         });
 
@@ -1329,11 +1358,158 @@
 
         updateThemeSelection(initialTheme);
 
+        const visitorCount = document.getElementById('visitor-count');
+        const visitorTodayCount = document.getElementById('visitor-today-count');
+        const visitorReturnRate = document.getElementById('visitor-return-rate');
+        const randomInteger = (minimum, maximum) => Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+        const visitorMetricsKey = 'milan-portfolio-visitor-sample-v2';
+        const getVisitorDay = timestamp => new Date(timestamp).toISOString().slice(0, 10);
+        let refreshResumeViewCount;
+        const createVisitorMetrics = () => ({
+            active: randomInteger(1, 5),
+            visitsToday: randomInteger(5, 20),
+            returningRate: randomInteger(80, 95),
+            day: getVisitorDay(Date.now()),
+            nextUpdateAt: Date.now() + 2 * 60 * 1000
+        });
+        const isValidVisitorMetrics = metrics => metrics
+            && Number.isInteger(metrics.active) && metrics.active >= 1 && metrics.active <= 5
+            && Number.isInteger(metrics.visitsToday) && metrics.visitsToday >= 5 && metrics.visitsToday <= 20
+            && Number.isInteger(metrics.returningRate) && metrics.returningRate >= 0 && metrics.returningRate <= 95
+            && typeof metrics.day === 'string' && Number.isFinite(metrics.nextUpdateAt);
+        let visitorMetrics;
+        try {
+            const savedMetrics = JSON.parse(localStorage.getItem(visitorMetricsKey));
+            visitorMetrics = isValidVisitorMetrics(savedMetrics) ? savedMetrics : createVisitorMetrics();
+        } catch {
+            visitorMetrics = createVisitorMetrics();
+        }
+
+        function updateVisitorMetrics() {
+            const now = Date.now();
+            const today = getVisitorDay(now);
+            if (visitorMetrics.day !== today) {
+                visitorMetrics.day = today;
+                visitorMetrics.visitsToday = randomInteger(5, 20);
+            }
+
+            if (now >= visitorMetrics.nextUpdateAt) {
+                visitorMetrics.active = randomInteger(1, 5);
+                visitorMetrics.returningRate = Math.min(95, visitorMetrics.returningRate + randomInteger(1, 2));
+                visitorMetrics.nextUpdateAt = now + 2 * 60 * 1000;
+            }
+
+            visitorCount.textContent = String(visitorMetrics.active);
+            visitorTodayCount.textContent = String(visitorMetrics.visitsToday);
+            visitorReturnRate.textContent = `${visitorMetrics.returningRate}%`;
+            if (refreshResumeViewCount) refreshResumeViewCount();
+
+            try {
+                localStorage.setItem(visitorMetricsKey, JSON.stringify(visitorMetrics));
+            } catch {
+                // Keep the sample counters working for browsers with storage disabled.
+            }
+
+            window.setTimeout(updateVisitorMetrics, Math.max(1000, visitorMetrics.nextUpdateAt - Date.now()));
+        }
+
+        updateVisitorMetrics();
+
+        const resumeDownloadCountElement = document.getElementById('resume-download-count');
+        const resumeDownloadCountLabel = document.getElementById('resume-download-count-label');
         const resumeToast = document.getElementById('resume-toast');
         const resumeToastMessage = document.getElementById('resume-toast-message');
+        const localResumeViewStorageKey = 'milan-resume-view-count';
+        const countedResumeDownloadDayKey = 'milan-resume-view-download-day';
+        let inMemoryResumeViewState;
+        let resumeViewUsesMemoryStorage = false;
+        let inMemoryCountedResumeDownloadDay;
+
+        function updateLocalResumeViewCount(increment) {
+            const today = visitorMetrics.day;
+            let savedState;
+            try {
+                savedState = localStorage.getItem(localResumeViewStorageKey);
+            } catch {
+                resumeViewUsesMemoryStorage = true;
+            }
+            let state;
+
+            if (resumeViewUsesMemoryStorage && inMemoryResumeViewState) {
+                state = { ...inMemoryResumeViewState };
+            } else if (savedState === null || resumeViewUsesMemoryStorage) {
+                state = { count: visitorMetrics.visitsToday - randomInteger(2, 3), day: today };
+            } else {
+                state = JSON.parse(savedState);
+                const stateDayNumber = typeof state?.day === 'string'
+                    ? Date.parse(`${state.day}T00:00:00.000Z`)
+                    : NaN;
+                if (!Number.isSafeInteger(state?.count) || state.count < 0
+                    || !Number.isFinite(stateDayNumber) || new Date(stateDayNumber).toISOString().slice(0, 10) !== state.day) {
+                    throw new Error('Stored local resume view count is invalid.');
+                }
+            }
+
+            if (state.day !== today
+                || state.count < visitorMetrics.visitsToday - 3
+                || state.count > visitorMetrics.visitsToday - 2) {
+                state = { count: visitorMetrics.visitsToday - randomInteger(2, 3), day: today };
+            }
+
+            if (increment && state.count < visitorMetrics.visitsToday - 2) {
+                state.count += 1;
+            }
+            inMemoryResumeViewState = { ...state };
+            try {
+                localStorage.setItem(localResumeViewStorageKey, JSON.stringify(state));
+            } catch {
+                resumeViewUsesMemoryStorage = true;
+            }
+            return state.count;
+        }
+
+        function hasCountedResumeDownloadToday() {
+            const today = new Date().toISOString().slice(0, 10);
+            try {
+                return localStorage.getItem(countedResumeDownloadDayKey) === today;
+            } catch {
+                resumeViewUsesMemoryStorage = true;
+                return inMemoryCountedResumeDownloadDay === today;
+            }
+        }
+
+        function markResumeDownloadCountedToday() {
+            const today = new Date().toISOString().slice(0, 10);
+            inMemoryCountedResumeDownloadDay = today;
+            try {
+                localStorage.setItem(countedResumeDownloadDayKey, today);
+            } catch {
+                resumeViewUsesMemoryStorage = true;
+            }
+        }
+
+        function updateResumeViewCount(countDownload = false) {
+            const shouldIncrement = countDownload && !hasCountedResumeDownloadToday();
+            try {
+                const count = updateLocalResumeViewCount(shouldIncrement);
+                if (shouldIncrement) markResumeDownloadCountedToday();
+                resumeDownloadCountElement.textContent = String(count);
+            } catch (error) {
+                console.error('Unable to update resume view count:', error);
+                resumeDownloadCountElement.textContent = '—';
+                resumeToastMessage.textContent = 'Unable to update the resume view count.';
+                resumeToast.classList.add('show');
+                window.setTimeout(() => resumeToast.classList.remove('show'), 3500);
+            }
+        }
+        refreshResumeViewCount = () => updateResumeViewCount();
+        resumeDownloadCountLabel.textContent = 'Resume Views';
+        resumeDownloadCountElement.closest('.impact-card').setAttribute('aria-label', 'Resume views');
+        updateResumeViewCount();
         // --- Resume Download Toast ---
         document.getElementById('download-btn').addEventListener('click', (e) => {
             e.preventDefault();
+            updateResumeViewCount(true);
             trackAnalyticsEvent('resume_download', { file_name: 'Milan_Kumar_Maharana.pdf' });
             resumeToastMessage.textContent = 'Action: Downloading Milan_Kumar_Maharana.pdf...';
             resumeToast.classList.add('show');
@@ -1415,8 +1591,8 @@
 
         // Copy Button Logic
         copyBtn.addEventListener('click', () => {
+            trackAnalyticsEvent('skill_code_copy');
             navigator.clipboard.writeText(currentCodeText.replace(/\\n/g, '\n'));
-            trackAnalyticsEvent('code_snippet_copied');
             copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
             setTimeout(() => {
                 copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
@@ -1466,9 +1642,7 @@
 
         function processUserMessage(text, inputMethod = 'typed') {
             if (!text.trim()) return;
-            trackAnalyticsEvent('ai_chat_message_submitted', {
-                input_method: inputMethod
-            });
+            trackAnalyticsEvent('ai_chat_message_submitted', { input_method: inputMethod });
             const userMsg = document.createElement('div');
             userMsg.className = 'msg user';
             userMsg.textContent = text;
@@ -1496,16 +1670,16 @@
         }
 
         document.querySelectorAll('.chat-chip').forEach(chip => {
-            chip.addEventListener('click', (e) => processUserMessage(e.target.textContent, 'quick_prompt'));
+            chip.addEventListener('click', (e) => processUserMessage(e.currentTarget.textContent, 'quick_prompt'));
         });
-        chatSendBtn.addEventListener('click', () => processUserMessage(chatInput.value, 'typed'));
-        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') processUserMessage(chatInput.value, 'typed'); });
+        chatSendBtn.addEventListener('click', () => processUserMessage(chatInput.value, 'send_button'));
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') processUserMessage(chatInput.value, 'enter_key'); });
         
         clearChatBtn.addEventListener('click', () => {
+            trackAnalyticsEvent('ai_chat_cleared');
             chatGeneration += 1;
             chatHistory.innerHTML = initialAiMessage;
             MilanProfileModel.resetConversation();
-            trackAnalyticsEvent('ai_chat_cleared');
         });
 
         // --- 6. Animated Canvas Particles ---
